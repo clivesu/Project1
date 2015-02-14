@@ -1,0 +1,19 @@
+1. Baseline: As a programmer, want to store purchasing and customer information in this program, to complete my assignment.
+
+2. As an accountant at Bulk Club, I want to generate a daily sales report to organize our sales figures
+
+3. As a member of Bulk Club, I want to be able to find a list of my totla purchases to keep track of my shopping.
+
+4. As an inventory manager at Bulk Club, I want to be able to find the price and quantity of a given item to keep track of inventory.
+
+5. As a manager at Bulk Club, I want to generate a report that lists all items sold.
+
+6. As a manager at Bulk Club, I want to generate a report that lists the rebates of all preferred members.
+
+7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month to be able to send remindersto members.
+
+8. As a customer service manager at Bulk Club, I want to add to and delete members from our remembership roster to have an idea of the number of members we have to service.
+
+9. As a sales analyst at Bulk Club, I want to be able to save changes between executions of this program so that it helps us see the long-term picture of member activity at our stores.
+
+10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred membership, or preferred to basic, to help manage my finances. 
