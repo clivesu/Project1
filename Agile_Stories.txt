@@ -1,19 +1,46 @@
-1. Baseline: As a programmer, want to store purchasing and customer information in this program, to complete my assignment.
 
-2. As an accountant at Bulk Club, I want to generate a daily sales report to organize our sales figures
 
-3. As a member of Bulk Club, I want to be able to find a list of my totla purchases to keep track of my shopping.
+1. Baseline: As a programmer, want to store purchasing and customer information in this program, to complete my assignment. 1
 
-4. As an inventory manager at Bulk Club, I want to be able to find the price and quantity of a given item to keep track of inventory.
 
-5. As a manager at Bulk Club, I want to generate a report that lists all items sold.
+2. As an accountant at Bulk Club, I want to generate a daily sales report to organize our sales figures. 
+This will require a menu option with which to select the creation of the sales report. 
+Additionally this requires the formating of the output, and access to the list of sales. 4
+
+
+3. As a member of Bulk Club, I want to be able to find a list of my total purchases to keep track of my shopping. 
+This will require a menu option to differentiate members from employees, a search list function to locate members 
+transactions based on their number, and output formatted in a palatable manner. 3
+
+
+4. As an inventory manager at Bulk Club, I want to be able to find the price and quantity of a given item to keep
+track of inventory. This needs a search function and a counter in order to work. 2
+
+
+5. As a manager at Bulk Club, I want to generate a report that lists all items sold. To do this we, the programmers,
+need to keep an updated file of the sales that have occurred marked by the date in order to keep a consistent record. 
+Output has already been formatted by this point for the most part. 2
+
 
 6. As a manager at Bulk Club, I want to generate a report that lists the rebates of all preferred members.
+This will run a loop that calculates and stores the rebate for each of the preferred members. 3
 
-7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month to be able to send remindersto members.
 
-8. As a customer service manager at Bulk Club, I want to add to and delete members from our remembership roster to have an idea of the number of members we have to service.
+7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month 
+to be able to send reminders to members. As such, we will need to check the payments and the dates of memberships and 
+include a check that triggers a reminder for the employees to send to the bulk club members. 4
 
-9. As a sales analyst at Bulk Club, I want to be able to save changes between executions of this program so that it helps us see the long-term picture of member activity at our stores.
 
-10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred membership, or preferred to basic, to help manage my finances. 
+8. As a customer service manager at Bulk Club, I want to add to and delete members from our membership roster to have
+an idea of the number of members we have to service. Adding and deleting members from a linked list. 2
+
+
+9. As a sales analyst at Bulk Club, I want to be able to save changes between executions of this program so that it
+helps us see the long-term picture of member activity at our stores. We will need to create a file and output the results
+of each change to the program to this file, named based on the date. 3?
+
+
+10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred
+membership. We need to check to see if the difference between the membership cost and the rebate is significant to the
+customers and program in an alert to change their membership status. 4
+
