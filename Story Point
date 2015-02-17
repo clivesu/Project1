@@ -1,0 +1,60 @@
+1. Baseline: As a programmer, want to store purchasing and customer information in this program, to complete my assignment.
+
+Task: Implement classes used to store information and create methods that help organize and displace information for the user.
+Test: Using the given data for members of the club and item bought and see if the input and output are correct such as sorting and searching function. 
+Story point: 1
+
+2. As an accountant at Bulk Club, I want to generate a daily sales report to organize our sales figures.
+
+Task: Create a read function to input the item into the list, create a calculation and display function to show the daily sales.
+Test: Make sure that the read function is reading and inputting the items into the list correct by checking if the item in the list is equal to the read in item. Make sure the daily sales figures are correct with desire result.
+Story point: 4
+
+3. As a member of Bulk Club, I want to be able to find a list of my total purchases to keep track of my shopping.
+
+Task: Create a search function that find a certain member and output all purchases made by this person.
+Test: Make sure the search function is working correct and grabbing the right person and check that the item purchase is equal to the original given data. If person doesn’t exist then a message will appear saying so.
+Story point: 2
+
+4. As an inventory manager at Bulk Club, I want to be able to find the price and quantity of a given item to keep track of inventory.
+
+Task: Create a list with this inventory information and a search function.
+Test: Make sure search function put up the correct information and check that when an item that is not there, it will tell you so.
+Story point: 3
+
+5. As a manager at Bulk Club, I want to generate a report that lists all items sold.
+
+Task: Create calculation method that will output all required data.
+Test: Make sure quality and total price is accurate, that it is deducing for the total amount in inventory correctly. When there is none it should read 0.
+Story point: 2
+
+6. As a manager at Bulk Club, I want to generate a report that lists the rebates of all preferred members.
+
+Task: For preferred members only create a method that calculate and output the rebate total.
+Test: Make sure it is outputting for preferred members only. Check to see the result of the rebates are correct and is 6%.
+Story point: 1
+
+7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month to be able to send reminders to members.
+
+Task: Create a function to find members who membership will expires in a given month.
+Test: Run it for all months and check if the list is accurate. 
+Story point: 1 
+
+8. As a customer service manager at Bulk Club, I want to add to and delete members from our membership roster to have an idea of the number of members we have to service.
+
+Task: Create a delete and add function so members can be added or delete from the membership list.
+Test: When adding making sure correct information is added to the list and that the total members count is increased. When deleting make sure members count is decreased and the member is actually taken off the list.
+Story point: 2
+
+9. As a sales analyst at Bulk Club, I want to be able to save changes between executions of this program so that it helps us see the long-term picture of member activity at our stores.
+
+Task: Create save files so that each execution is save properly and in a correct readable format.
+Test: Make changes to the list and make sure these changes are saved. Exit and restart program and make sure changes are still there.
+Story point: 4
+
+10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred membership, or preferred to basic, to help manage my finances. 
+
+Task: Create a function that check to see if it is better to switch from one membership status to the other by doing some calculations.
+Test: Make sure to test all scenario to see if correct recommendation is made.
+Story point: 2
+
