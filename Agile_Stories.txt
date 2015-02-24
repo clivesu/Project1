@@ -1,19 +1,84 @@
+User Stories
 1. Baseline: As a programmer, want to store purchasing and customer information in this program, to complete my assignment.
-
+	Tasks: 	Implement classes for Club Members, items, and transactions.
+Test:   Using the given data for items, transactions, and club members, code some sample data into the program, and see if it can be output successfully
+	Story Points: 1
+	Assigned to: all members, Sprint 1
+	
 2. As an accountant at Bulk Club, I want to generate a daily sales report to organize our sales figures
+	Tasks:  We need a Method to sort transactions by date
+		Method to tabulate transactions
+		Add a daily sales report option to the user menu
+Test:   For a given date, use the 2 methods above, and check against the list to see that the sales report contains all the correct information, and that the total is correct. 
+Try changing the transaction amounts, and see if that changes the total.
+		Also test these methods for lists of length 0.
+	Story Points: 2 
+	Assigned to: Sprint 2
 
-3. As a member of Bulk Club, I want to be able to find a list of my totla purchases to keep track of my shopping.
+3. As a member of Bulk Club, I want to be able to find a list of my total purchases to keep track of my shopping.
+	Tasks:  The member class needs a list of transactions, and a sum of all purchases
+		Add a member transaction list option to the user menu
+Test:   Find a random user, and manually find all his transactions. Compare against the list given by the method.
+		Test against users that don't exist, and users which have made no transactions
+	Story Points: 1
+	Assigned to: Clive, Sprint 1
 
 4. As an inventory manager at Bulk Club, I want to be able to find the price and quantity of a given item to keep track of inventory.
+	Tasks:  An inventory list must be created
+		List should contain price and quantity information
+		List be searchable by item number
+		List must have method to output its information
+		Add an inventory output option to the user menu
+
+	Test:   Do searches for items that exist and do not exist.
+		See if the list will handle duplicate item numbers.
+	Story Points: 3
+	Assigned to: Sprint 2
 
 5. As a manager at Bulk Club, I want to generate a report that lists all items sold.
+Tasks:  A method that tabulates and displays all the transactions, including number of each item, and total price, should be created
+		A total sales list option should be added to the user menu
+	Test:   Test to make sure a transaction is attached to both a user and the bulk club
+		Test if a transaction changes the quantity remaining
+		Test if a transaction will work if there is no quantity remaining
+	Story Points: 1
+	Assigned to: Jordan, Sprint 1
 
 6. As a manager at Bulk Club, I want to generate a report that lists the rebates of all preferred members.
+	Tasks:  Create a method that adds the rebates for each preferred member in the memberList
+		A total rebate option should be added to the user menu
+	Test:   Check that the total rebate is correct.
+	Story Points: 1
+	Assigned to: Sprint 2
 
-7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month to be able to send remindersto members.
+7. As a customer service representative at Bulk Club, I want to generate a list of membership expirations for a given month to be able to send reminders to members.
+	Tasks:  Create either a sort or search function for the Bulk Club, 
+		Have the search return the names and member numbers for a given month's expirations
+		Have a method of incrementing the expiration date by 1 year
+		The search by expiration date option should be added to the user menu
+Test:   Try searching for all possible months and see if the total number of members given is correct
+		Try to search for a date in the past	
+	Story Points: 1
+	Assigned to: Andrew, Sprint 1
 
-8. As a customer service manager at Bulk Club, I want to add to and delete members from our remembership roster to have an idea of the number of members we have to service.
+8. As a customer service manager at Bulk Club, I want to add to and delete members from our membership roster to have an idea of the number of members we have to service.
+Tasks:  Have both add and delete member methods in the memberList class. 
+Also have a count of all members of each type method.
+Test:  	 Create new members. 
+Check that both the default and non-default constructors do their jobs.
+		Delete members. Check that the totals are changed when members are deleted
+	Story Points: 1
+	Assigned to: Sprint 2
 
 9. As a sales analyst at Bulk Club, I want to be able to save changes between executions of this program so that it helps us see the long-term picture of member activity at our stores.
+Tasks:  Have save files and a set format for saving and retrieving data. Done on the program-wide level
+Test:   Make changes to membership, transactions, and inventory. Test if the changes can be saved.
+	Exit and restart the program. Check that the changes are still there. 
+	Story Points: 3
+	Assigned to: Sprint 2
 
-10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred membership, or preferred to basic, to help manage my finances. 
+10. As a member of Bulk Club, I would like to know whether it would be advantageous to switch from basic to preferred membership, or preferred to basic, to help manage my finances.  
+	Tasks:  Have a member function that calculates whether it is better to be basic or preferred
+Test:   Manually calculate the critical purchase amount, and test all 4 cases - a basic that should stay basic, a basic that should change to preferred, a preferred that should stay preferred, and a preferred that should change to basic.
+	Story Points: 0.5
+	Assigned to: Clive, Sprint 1
