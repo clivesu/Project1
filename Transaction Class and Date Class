@@ -3,6 +3,13 @@
 * Transaction Class
 **************************************************
 
+struct Item
+{
+	string name;
+	int num;
+	float price;
+};
+
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
 
@@ -17,30 +24,29 @@ class Transaction
 {
 public:
 	Transaction();
-	Transaction(string newName,int newNum,
-			float newPrice,int newMember);
+	Transaction(string newName, int newNum,
+		    float newPrice, int newMember);
 	~Transaction();
-	string GetItemName();
-	void SetItemName(string newName);
-	void PrintItemName();
-	int GetItemNum();
-	void SetItemNum(int newItemNum);
-	void PrintItemNum();
-	float GetPrice();
-	void SetPrice(float newPrice);
-	void PrintPrice();
+	string GetItem();
+	void SetItem(string newName);
+	void SetItem(int newItemNum);
+	void SetItem(float newPrice);
+	void SetItem(string newName, int newItemNum, float newPrice);
+	void PrintItem();
 	int GetMemberNum();
 	void SetMemberNum(int newMemberNum);
 	void PrintMemberNum();
-
-	Date OurDate;
+	Transaction GetNext();
+	void SetNext(Transaction *newNext);
+	Transaction GetPrev();
+	void SetNext(Transaction *newPrev);
 
 private:
-	string itemName;
-	int itemNum;
-	float price;
 	int memberNum;
+	Item theItem;
+	Date theDate;
 	Transaction *next;
+	Transaction *prev;
 };
 #endif /* TRANSACTION_H_ */
 
@@ -48,61 +54,56 @@ private:
 
 	Transaction::Transaction()
 	{
-		itemName = ' ';
-		itemNum = 0;
-		price = 0.0;
+		theItem.name = ' ';
+		theItem.num = 0;
+		theItem.price = 0.0;
 		memberNum = 0;
+		theDate::Date()
 		next = NULL;
+		prev = NULL;
 	}
 	Transaction::Transaction(string newName,int newNum,
-						   float newPrice,int newMember)
+				   float newPrice,int newMember)
 	{
-		itemName = newName;
-		itemNum = newNum;
-		price = newPrice;
+		theItem.name = newName;
+		theItem.num = newNum;
+		theItem.price = newPrice;
 		memberNum = newMember;
+		theDate::Date()
 		next = NULL;
+		prev = NULL;
 
 	}
 	Transaction::~Transaction()
 	{
-
+		cout << "Calling Transaction Deconstructor";
 	}
-	string Transaction::GetItemName()
+	Item Transaction::GetItem()
 	{
-		return itemName;
+		return theItem;
 	}
-	void Transaction::SetItemName(string newName)
+	void Transaction::SetItem(string newName)
 	{
-		itemName = newName;
+		theItem.name = newName;
 	}
-	void Transaction::PrintItemName()
+	void Transaction::SetItem(int newNum)
 	{
-		cout << itemName;
+		theItem.num = newNum;
 	}
-	int Transaction::GetItemNum()
+	void Transaction::SetItem(float newPrice)
 	{
-		return itemNum;
+		theItem.price = newPrice;
 	}
-	void Transaction::SetItemNum(int newItemNum)
+	void Transaction::SetItem(string newName,int newNum,
+				   float newPrice)
 	{
-		itemNum = newItemNum;
+		theItem.name = newName;
+		theItem.num = newNum;
+		theItem.price = newPrice;
 	}
-	void Transaction::PrintItemNum()
+	void Transaction::PrintItem()
 	{
-		cout << itemNum;
-	}
-	float Transaction::GetPrice()
-	{
-		return price;
-	}
-	void Transaction::SetPrice(float newPrice)
-	{
-		price = newPrice;
-	}
-	void Transaction::PrintPrice()
-	{
-		cout << price;
+		cout << theItem.name << ' ' << theItem.num << ' ' << theItem.price;
 	}
 	int Transaction::GetMemberNum()
 	{
@@ -116,88 +117,19 @@ private:
 	{
 		cout << memberNum;
 	}
-
-
-*********************************************************************************************
-Date
-*****************************************************************************
-
-
-#ifndef DATE_H_
-#define DATE_H_
-
-#include "transaction.h"
-
-class Date
-{
- public:
-    Date ();
-    Date ( int mn, int day, int yr);  // constructor
-    void PrintDate();
-    int  GetMonth();
-    void SetMonth(int NewMonth);
-    int  GetDay();
-    void SetDay(int newDay);
-    int  GetYear();
-    void SetYear(int newYear);
-    ~Date();
- private:
-    int month;
-    int day;
-    int year;
-};
-
-
-#endif /* DATE_H_ */
-
-#include "date.h"
-
-Date::Date()
-{
-	month = 1;
-	day = 1;
-	year = 2015;
-}
-
-Date::Date(int newMonth, int newDay, int newYear)
-{
-	month = newMonth;
-	day = newDay;
-	year = newYear;
-}
-
-Date::~Date()
-{
-
-}
-int  Date::GetMonth()
-{
-	return month;
-}
-
-void Date::SetMonth(int newMonth)
-{
-	month = newMonth;
-}
-int  Date::GetDay()
-{
-	return day;
-}
-void Date::SetDay(int newDay)
-{
-	day = newDay;
-}
-int  Date::GetYear()
-{
-	return year;
-}
-void Date::SetYear(int newYear)
-{
-	year = newYear;
-}
-void Date::PrintDate()
-{
-	cout << month << ' ' << day << ' ' << year;
-}
-
-
+	Transaction Transaction::GetNext()
+	{
+		return next;
+	}
+	void Transaction::SetNext(Transaction *newNext)
+	{
+		next = newNext;
+	}
+	Transaction Transaction::GetNext()
+	{
+		return Prev;
+	}
+	void Transaction::SetPrev(Transaction *newPrev)
+	{
+		prev = newPrev;
+	}
