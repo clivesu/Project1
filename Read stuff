@@ -1,0 +1,192 @@
+//Count the member list for how many members in total, basic members, and
+//preferred members
+void countMembersFile(ifstream &infile,
+		             int &memCount, int &basicCount, int &preferredCount)
+{
+	string id;
+	int    num;
+	int    count;
+	int    basic;
+	int    preferred;
+	int    numDay;
+	int    numMonth;
+	int    numYear;
+	string name;
+	string type;
+	string month;
+	string day;
+	string year;
+
+	count     = 0;
+	preferred = 0;
+	basic     = 0;
+
+	if(infile.is_open())
+	{
+		while(!infile.eof())
+		{
+			getline(infile,name);
+			getline(infile,id);
+			num = atoi(id.c_str());
+			getline(infile,type);
+
+			if(type == "Preferred")
+			{
+				preferred++;
+			}
+
+			else
+			{
+				basic++;
+			}
+
+			getline(infile, month, '/');
+			numMonth = atoi(month.c_str());
+
+			getline(infile, day, '/');
+			numDay = atoi(day.c_str());
+
+			getline(infile, year);
+			numYear = atoi(year.c_str());
+
+			count++;
+		}
+
+		memCount = count;
+		basicCount = basic;
+		preferredCount = preferred;
+
+		infile.close();
+	}
+
+	else
+	{
+		cout << "Unable to open file" << endl;
+	}
+
+}
+
+//Read file and put into item dont need the array part this was just for testing
+void readMembersFile(ifstream &infile, BasicMember all[],
+					 BasicMember basic[], PreferredMember pre[], int count)
+{
+string id;
+	int    num;
+	int    numDay;
+	int    numMonth;
+	int    numYear;
+	int    basicCount = 0;
+	int    preCount   = 0;
+	string name;
+	string type;
+	string month;
+	string day;
+	string year;
+
+	if(infile.is_open())
+	{
+		while(!infile.eof())
+		{
+			for(int i = 0; i < count; i++)
+			{
+				getline(infile,name);
+				getline(infile,id);
+				num = atoi(id.c_str());
+				getline(infile,type);
+
+				getline(infile, month, '/');
+				numMonth = atoi(month.c_str());
+				getline(infile, day, '/');
+				numDay = atoi(day.c_str());
+				getline(infile, year);
+				numYear = atoi(year.c_str());
+
+				all[i] = BasicMember(name,num,type,
+									  numMonth,numDay,numYear,0);
+
+				if(type == "Basic")
+				{
+					basic[basicCount] = BasicMember(name,num,type,
+							  numMonth,numDay,numYear,0);
+					basicCount++;
+				}
+
+				if(type == "Preferred")
+				{
+					pre[preCount] = PreferredMember(name,num,type,
+							  numMonth,numDay,numYear,0,0);
+					preCount++;
+				}
+			}
+		}
+
+		infile.close();
+	}
+
+	else
+	{
+		cout << "Unable to open file" << endl;
+	}
+}
+
+//Read the item list just need to get rid of cout (for testing) and add the method to put into list
+void readListFile(ifstream &infile)
+{
+	string month;
+	string day;
+	string year;
+	string id;
+	string item;
+	string amount;
+	float  numPrice;
+	int	   numMonth;
+	int    numDay;
+	int    numYear;
+	int    numId;
+	int    numAmount;
+	int    count;
+
+	count = 0;
+
+	if(infile.is_open())
+	{
+		while(!infile.eof())
+		{
+			getline(infile, month, '/');
+			numMonth = atoi(month.c_str());
+			cout   << numMonth << "-";
+
+			getline(infile, day, '/');
+			numDay = atoi(day.c_str());
+			cout   << numDay << "-";
+
+			getline(infile, year);
+			numYear = atoi(year.c_str());
+			cout   << numYear << endl;
+
+			getline(infile, id);
+			numId = atoi(id.c_str());
+			cout   << numId  << endl;
+
+			getline(infile,item);
+			cout << item << endl;
+
+			infile >> numPrice;
+			cout << numPrice << endl;
+
+			getline(infile, amount);
+			numAmount = atoi(amount.c_str());
+			cout << numAmount << endl;
+
+			count++;
+		}
+
+		cout << endl << "Amount of item in Day 1: " << count << endl;
+	}
+
+	else
+	{
+		cout << "Unable to open file";
+	}
+}
+
