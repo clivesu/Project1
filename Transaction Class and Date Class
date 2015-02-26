@@ -133,3 +133,150 @@ private:
 	{
 		prev = newPrev;
 	}
+*************************************************************************************************************
+
+#ifndef TRANSACTION_LIST_H_
+#define TRANSACTION_LIST_H_
+#include "Transaction.h"
+
+class TransactionList
+{
+	TransactionList();
+	~TransactionList();
+
+	Transaction* FindMemberNode(int searchMemberNum) const;
+	Transaction* FindItemNode(string searchName) const;
+	Transaction* FindItemNode(int searchItemNum) const;
+
+	void AddNode();
+	void DeleteNode(BasicMember* target);
+
+	void OutputList();
+	void DeleteList();
+
+private:
+	Transaction* head;
+};
+
+#endif /* TRANSACTION_LIST_H_ */
+************************************************************************************************************
+#include "TransactionList.h"
+
+TransactionList::TransactionList()
+{
+	head = NULL;
+}
+
+TransactionList::~TransactionList()
+{
+	DeleteList();
+}
+
+Transaction* TransactionList::FindMemberNode(int searchMemberNum) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetMemberNum != searchMemberNum)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+Transaction* TransactionList::FindItemNode(string searchName) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetItem.name != searchName)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+Transaction* TransactionList::FindItemNode(int searchItemNum) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetItem.num != searchItemNum)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+
+void TransactionList::AddNode()
+{
+	Transaction* newNode;
+
+	newNode = new Transaction;
+
+	//FILE INPUT NEEDED
+
+	head = newNode;
+	newNode = NULL;
+
+	if(head->GetNext() != NULL)
+	{
+		head->GetNext()->SetPrev(head);
+	}
+
+
+}
+
+void TransactionList::DeleteNode(Transaction* target)
+{
+	if(target->GetNext() != NULL)
+	{
+		target->GetNext()->SetPrev(target->GetPrev());
+	}
+
+	if(target->GetPrev() != NULL)
+	{
+		target->GetPrev()->SetNext(target->GetNext());
+	}
+	else
+	{
+		head = target->GetNext();
+	}
+
+	delete target;
+}
+
+void TransactionList::OutputList()
+{
+	BasicMember* traverser;
+
+	traverser = head;
+
+	while(traverser != NULL)
+	{
+		traverser->PrintItem();
+		traverser->PrintMemberNum()
+		traverser = traverser->GetNext();
+	}
+}
+
+void TransactionList::DeleteList()
+{
+	Transaction* deleter;
+
+
+	while(head!= NULL)
+	{
+		deleter = head->GetNext();
+		delete head;
+		head = deleter;
+	}
+
+}
