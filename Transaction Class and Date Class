@@ -3,15 +3,20 @@
 * Transaction Class
 **************************************************
 
-struct Item
+*****************************************************************************
+struct Item		//Creation of the "Item" structure
 {
-	string name;
-	int num;
-	float price;
+	string name;	//Name of the item
+	int num;	//Number of the item
+	float price;	//Cost of the Item
 };
+*****************************************************************************
 
+*****************************************************************************
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
+
+//Preprocessor directives needed to utilize the Transaction class
 
 #include <string>
 #include <iostream>
@@ -20,39 +25,47 @@ struct Item
 
 using namespace std;
 
+//Creation of the Transaction Class type
+
 class Transaction
 {
 public:
-	Transaction();
+	Transaction();					//Default Constructor
 	Transaction(string newName, int newNum,
-		    float newPrice, int newMember);
-	~Transaction();
-	string GetItem();
-	void SetItem(string newName);
-	void SetItem(int newItemNum);
-	void SetItem(float newPrice);
-	void SetItem(string newName, int newItemNum, float newPrice);
-	void PrintItem();
-	int GetMemberNum();
-	void SetMemberNum(int newMemberNum);
-	void PrintMemberNum();
-	Transaction GetNext();
-	void SetNext(Transaction *newNext);
-	Transaction GetPrev();
-	void SetNext(Transaction *newPrev);
+		    float newPrice, int newMember);	//Overloaded Constructor
+	~Transaction();					//Deconstructor
+	
+	string GetItem();		//Returns the Item
+	void SetItem(string newName);	//Sets the Name of the item
+	void SetItem(int newItemNum);	//Sets the Number of the item
+	void SetItem(float newPrice);	//Sets the Price of the item
+	void SetItem(string newName, int newItemNum, float newPrice);	//Sets the name, number, and price of an item
+	void PrintItem();		//Outputs the name, number and price of an item
+	
+	int GetMemberNum();			//Returns the members number
+	void SetMemberNum(int newMemberNum);	//Sets the members number
+	void PrintMemberNum();			//Outputs the members number
+	
+	Transaction GetNext();			//Returns next
+	void SetNext(Transaction *newNext);	//Sets next
+	Transaction GetPrev();			//Returns prev
+	void SetNext(Transaction *newPrev);	//Sets prev
 
 private:
-	int memberNum;
-	Item theItem;
-	Date theDate;
-	Transaction *next;
-	Transaction *prev;
+	int memberNum;		//The number of the member
+	Item theItem;		//The item in the transaction
+	Date theDate;		//The date of the transaction
+	Transaction *next;	//next used for the list
+	Transaction *prev;	//prev used for the list
 };
 #endif /* TRANSACTION_H_ */
 
+*****************************************************************************
+
+*****************************************************************************
 #include "transaction.h"
 
-	Transaction::Transaction()
+	Transaction::Transaction()	//Basic initiallization of values in transaction class
 	{
 		theItem.name = ' ';
 		theItem.num = 0;
@@ -62,8 +75,9 @@ private:
 		next = NULL;
 		prev = NULL;
 	}
+	
 	Transaction::Transaction(string newName,int newNum,
-				   float newPrice,int newMember)
+				   float newPrice,int newMember) //Specified inititallization of values in transaction class
 	{
 		theItem.name = newName;
 		theItem.num = newNum;
@@ -74,37 +88,46 @@ private:
 		prev = NULL;
 
 	}
-	Transaction::~Transaction()
+	
+	Transaction::~Transaction() //Deconstructor
 	{
 		cout << "Calling Transaction Deconstructor";
 	}
+	
 	Item Transaction::GetItem()
 	{
 		return theItem;
 	}
+	
 	void Transaction::SetItem(string newName)
 	{
 		theItem.name = newName;
 	}
+	
 	void Transaction::SetItem(int newNum)
 	{
 		theItem.num = newNum;
 	}
+	
 	void Transaction::SetItem(float newPrice)
 	{
 		theItem.price = newPrice;
 	}
-	void Transaction::SetItem(string newName,int newNum,
-				   float newPrice)
+	
+	void Transaction::SetItem(string newName,
+				  int newNum,
+				  float newPrice)
 	{
 		theItem.name = newName;
 		theItem.num = newNum;
 		theItem.price = newPrice;
 	}
+	
 	void Transaction::PrintItem()
 	{
-		cout << theItem.name << ' ' << theItem.num << ' ' << theItem.price;
+		cout << theItem.name << ' ' << theItem.num << ' ' << theItem.price; //Subject to change based on formatting
 	}
+	
 	int Transaction::GetMemberNum()
 	{
 		return memberNum;
@@ -113,6 +136,7 @@ private:
 	{
 		memberNum = newMemberNum;
 	}
+	
 	void Transaction::PrintMemberNum()
 	{
 		cout << memberNum;
@@ -121,15 +145,169 @@ private:
 	{
 		return next;
 	}
+	
 	void Transaction::SetNext(Transaction *newNext)
 	{
 		next = newNext;
 	}
+	
 	Transaction Transaction::GetNext()
 	{
 		return Prev;
 	}
+	
 	void Transaction::SetPrev(Transaction *newPrev)
 	{
 		prev = newPrev;
 	}
+*****************************************************************************
+
+*****************************************************************************
+
+#ifndef TRANSACTION_LIST_H_
+#define TRANSACTION_LIST_H_
+#include "Transaction.h"
+
+class TransactionList
+{
+	TransactionList();	//Constructor
+	~TransactionList();	//Deconstructor
+
+	Transaction* FindMemberNode(int searchMemberNum) const; //Searched for and returns a node based on member num
+	Transaction* FindItemNode(string searchName) const;	//Searched for and returns a node based on item name
+	Transaction* FindItemNode(int searchItemNum) const;	//Searched for and returns a node based on item num
+
+	void AddNode();				//Creates a new Transaction node
+	void DeleteNode(BasicMember* target);	//Deletes a chosen Transaction node
+
+	void OutputList();	//Outputs the entire Transaction list
+	void DeleteList();	//Clears the entire Transaction list
+
+private:
+	Transaction* head;	//The head of the list
+};
+
+#endif /* TRANSACTION_LIST_H_ */
+*****************************************************************************
+
+*****************************************************************************
+#include "TransactionList.h"
+
+TransactionList::TransactionList()
+{
+	head = NULL;
+}
+
+TransactionList::~TransactionList()
+{
+	DeleteList();
+}
+
+Transaction* TransactionList::FindMemberNode(int searchMemberNum) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetMemberNum != searchMemberNum)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+Transaction* TransactionList::FindItemNode(string searchName) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetItem.name != searchName)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+Transaction* TransactionList::FindItemNode(int searchItemNum) const
+{
+	BasicMember* finder;
+
+	finder = head;
+
+	while(finder!= NULL && finder->GetItem.num != searchItemNum)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+
+void TransactionList::AddNode()
+{
+	Transaction* newNode;
+
+	newNode = new Transaction;
+
+	//FILE INPUT NEEDED
+
+	head = newNode;
+	newNode = NULL;
+
+	if(head->GetNext() != NULL)
+	{
+		head->GetNext()->SetPrev(head);
+	}
+
+
+}
+
+void TransactionList::DeleteNode(Transaction* target)
+{
+	if(target->GetNext() != NULL)
+	{
+		target->GetNext()->SetPrev(target->GetPrev());
+	}
+
+	if(target->GetPrev() != NULL)
+	{
+		target->GetPrev()->SetNext(target->GetNext());
+	}
+	else
+	{
+		head = target->GetNext();
+	}
+
+	delete target;
+}
+
+void TransactionList::OutputList()
+{
+	BasicMember* traverser;
+
+	traverser = head;
+
+	while(traverser != NULL)
+	{
+		traverser->PrintItem();
+		traverser->PrintMemberNum()
+		traverser = traverser->GetNext();
+	}
+}
+
+void TransactionList::DeleteList()
+{
+	Transaction* deleter;
+
+
+	while(head!= NULL)
+	{
+		deleter = head->GetNext();
+		delete head;
+		head = deleter;
+	}
+
+}
