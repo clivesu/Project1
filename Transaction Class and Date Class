@@ -265,6 +265,28 @@ void TransactionList::AddNode()
 
 }
 
+void TransactionList::AddNode(Transaction *nodeToAdd)	//Overloads the AddNode method to add an existing node
+							//the way we can create an item list by simply declaring and
+							//TransactionList named ItemList in main and calling this method
+							//right?
+{
+	Transaction* newNode;
+
+	newNode = new Transaction;
+
+	newNode = nodeToAdd;
+
+	head = newNode;
+	newNode = NULL;
+
+	if(head->GetNext() != NULL)
+	{
+		head->GetNext()->SetPrev(head);
+	}
+
+
+}
+
 void TransactionList::DeleteNode(Transaction* target)
 {
 	if(target->GetNext() != NULL)
