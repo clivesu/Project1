@@ -1,0 +1,203 @@
+/*************************************************
+* Jordan Acquah-Asare
+* Transaction Class
+**************************************************
+
+#ifndef TRANSACTION_H_
+#define TRANSACTION_H_
+
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include "date.h"
+
+using namespace std;
+
+class Transaction
+{
+public:
+	Transaction();
+	Transaction(string newName,int newNum,
+			float newPrice,int newMember);
+	~Transaction();
+	string GetItemName();
+	void SetItemName(string newName);
+	void PrintItemName();
+	int GetItemNum();
+	void SetItemNum(int newItemNum);
+	void PrintItemNum();
+	float GetPrice();
+	void SetPrice(float newPrice);
+	void PrintPrice();
+	int GetMemberNum();
+	void SetMemberNum(int newMemberNum);
+	void PrintMemberNum();
+
+	Date OurDate;
+
+private:
+	string itemName;
+	int itemNum;
+	float price;
+	int memberNum;
+	Transaction *next;
+};
+#endif /* TRANSACTION_H_ */
+
+#include "transaction.h"
+
+	Transaction::Transaction()
+	{
+		itemName = ' ';
+		itemNum = 0;
+		price = 0.0;
+		memberNum = 0;
+		next = NULL;
+	}
+	Transaction::Transaction(string newName,int newNum,
+						   float newPrice,int newMember)
+	{
+		itemName = newName;
+		itemNum = newNum;
+		price = newPrice;
+		memberNum = newMember;
+		next = NULL;
+
+	}
+	Transaction::~Transaction()
+	{
+
+	}
+	string Transaction::GetItemName()
+	{
+		return itemName;
+	}
+	void Transaction::SetItemName(string newName)
+	{
+		itemName = newName;
+	}
+	void Transaction::PrintItemName()
+	{
+		cout << itemName;
+	}
+	int Transaction::GetItemNum()
+	{
+		return itemNum;
+	}
+	void Transaction::SetItemNum(int newItemNum)
+	{
+		itemNum = newItemNum;
+	}
+	void Transaction::PrintItemNum()
+	{
+		cout << itemNum;
+	}
+	float Transaction::GetPrice()
+	{
+		return price;
+	}
+	void Transaction::SetPrice(float newPrice)
+	{
+		price = newPrice;
+	}
+	void Transaction::PrintPrice()
+	{
+		cout << price;
+	}
+	int Transaction::GetMemberNum()
+	{
+		return memberNum;
+	}
+	void Transaction::SetMemberNum(int newMemberNum)
+	{
+		memberNum = newMemberNum;
+	}
+	void Transaction::PrintMemberNum()
+	{
+		cout << memberNum;
+	}
+
+
+*********************************************************************************************
+Date
+*****************************************************************************
+
+
+#ifndef DATE_H_
+#define DATE_H_
+
+#include "transaction.h"
+
+class Date
+{
+ public:
+    Date ();
+    Date ( int mn, int day, int yr);  // constructor
+    void PrintDate();
+    int  GetMonth();
+    void SetMonth(int NewMonth);
+    int  GetDay();
+    void SetDay(int newDay);
+    int  GetYear();
+    void SetYear(int newYear);
+    ~Date();
+ private:
+    int month;
+    int day;
+    int year;
+};
+
+
+#endif /* DATE_H_ */
+
+#include "date.h"
+
+Date::Date()
+{
+	month = 1;
+	day = 1;
+	year = 2015;
+}
+
+Date::Date(int newMonth, int newDay, int newYear)
+{
+	month = newMonth;
+	day = newDay;
+	year = newYear;
+}
+
+Date::~Date()
+{
+
+}
+int  Date::GetMonth()
+{
+	return month;
+}
+
+void Date::SetMonth(int newMonth)
+{
+	month = newMonth;
+}
+int  Date::GetDay()
+{
+	return day;
+}
+void Date::SetDay(int newDay)
+{
+	day = newDay;
+}
+int  Date::GetYear()
+{
+	return year;
+}
+void Date::SetYear(int newYear)
+{
+	year = newYear;
+}
+void Date::PrintDate()
+{
+	cout << month << ' ' << day << ' ' << year;
+}
+
+

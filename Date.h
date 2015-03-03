@@ -13,23 +13,24 @@ const int DAYS_IN_MONTH[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 class Date
 {
 public:
-Date();
-Date(int newDay, int newMonth, int newYear);
-~Date();
-int GetDay() const;
-int GetMonth() const;
-int GetYear() const;
-void DisplayDate() const;
-void SetDate(int newDay, int newMonth, int newYear);
-void SetDay(int newDay);
-void SetMonth(int newMonth);
-void SetYear(int newYear);
-void IncrementDay();
-int MonthDifference(Date laterDate) const;
-bool ValiDate() const;
+
+	Date();
+	Date(int newDay, int newMonth, int newYear);
+	~Date();
+	int GetDay() const;
+	int GetMonth() const;
+	int GetYear() const;
+	void DisplayDate() const;
+	void SetDate(int newDay, int newMonth, int newYear);
+	void SetDay(int newDay);
+	void SetMonth(int newMonth);
+	void SetYear(int newYear);
+	void IncrementDay();
+	bool ValiDate() const;
+
 private:
-int day;
-int month;
-int year;
+	int day;
+	int month;
+	int year;
 };
 #endif /* DATE_H_ */

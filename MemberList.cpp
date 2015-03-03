@@ -7,6 +7,7 @@ MemberList::MemberList()
 {
 head = NULL;
 }
+
 MemberList::~MemberList()
 {
 DeleteList();
@@ -21,31 +22,30 @@ finder = finder->GetNext();
 }
 return finder;
 }
+
 void MemberList::AddNode(string newName, int newNum, int newMonth, int newDay, int newYear, dollars newTotal)
 {
 
-BasicMember* newNode;
-newNode = new BasicMember;
-//the new node should be initialized from input here
-newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	BasicMember* newNode;
+	newNode = new BasicMember;
+	//the new node should be initialized from input here
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
 
-if(head == NULL)
-{
-head = newNode;
-}
-
-else
-{
-BasicMember* current;
-current = head;
-while(current->GetNext() != NULL)
-{
-	current = current->GetNext();
-}
-current->SetNext(newNode);
-newNode->SetPrev(current);
-newNode->SetNext(NULL);
-}
+	if(head == NULL)
+	{
+		head = newNode;
+	}
+	else
+	{
+		BasicMember* current;
+		current = head;
+		while(current->GetNext() != NULL)
+		{
+			current = current->GetNext();
+		}
+		current->SetNext(newNode);
+		newNode->SetPrev(current);
+	}
 }
 void MemberList::DeleteNode(BasicMember* target)
 {
