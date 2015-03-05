@@ -20,9 +20,9 @@ cout << rebate << endl;
 // Overrides the BasicMember method, but includes rebate
 //}
 
-void PreferredMember::SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, dollars newTotal, dollars newRebate)
+void PreferredMember::SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal, dollars newRebate)
 {
-BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear,newTotal);
+BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear, newType,newTotal);
 rebate = newRebate;
 }
 dollars PreferredMember::GetRebate()
