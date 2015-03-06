@@ -1,31 +1,32 @@
+#ifndef TRANSACTION_H_
+#define TRANSACTION_H_
 
+#include <iostream>
+#include "Date.h"
+using namespace std;
 
-#ifndef TRANSACTION_LIST_H_
-#define TRANSACTION_LIST_H_
-
-#include "Transaction.h"
-
-
-
-class TransactionList
+class Transaction
 {
-	TransactionList();
-	~TransactionList();
-
-	Transaction* FindMemberNode(int searchMemberNum) const; //Searched for and returns a node based on member num
-	Transaction* FindItemNode(string searchName) const;	//Searched for and returns a node based on item name
-	Transaction* FindItemNode(int searchItemNum) const;	//Searched for and returns a node based on item num
-
-	void AddNode();				//Creates a new Transaction node
-	void DeleteNode(Transaction* target);	//Deletes a chosen Transaction node
-
-	void OutputList();	//Outputs the entire Transaction list
-	void DeleteList();	//Clears the entire Transaction list
-
+public:
+	Transaction();
+	virtual ~Transaction();
+	virtual void SetItem(int newMonth, int newDay, int newYear, string newName,
+				 dollars newPrice,int newAmount);
+	virtual void PrintItem(); //Outputs the name, number and price of an item
+	Transaction* GetNext();
+	void SetNext(Transaction* newNext);
+	Transaction* GetPrev();
+	void SetPrev(Transaction* newPrev);
 private:
-	Transaction* head;	//The head of the list
+	Date    boughtDate;
+	string  itemName;
+	dollars price;
+	int		quanity;
+	Transaction *next;
+	Transaction *prev;
 };
 
-#endif
+#endif /* TRANSACTION_H_ */
+
 
 
