@@ -29,7 +29,7 @@ void ReadMembersFile(ifstream &infile, MemberList &list)
 				getline(infile, year);
 				numYear = atoi(year.c_str());
 
-				list.AddNode(name,num,numMonth,numDay,numYear,0);
+				//list.AddNode(name,quantity,numMonth,numDay,numYear,0);
 		}
 		infile.close();
 	}

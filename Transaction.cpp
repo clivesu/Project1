@@ -3,7 +3,7 @@
 Transaction::Transaction()	//Basic initiallization of values in transaction class
 {
 	theItem.name = ' ';
-	theItem.num = 0;
+	theItem.quantity = 0;
 	theItem.price = 0.0;
 	memberNum = 0;
 
@@ -11,11 +11,11 @@ Transaction::Transaction()	//Basic initiallization of values in transaction clas
 	prev = NULL;
 }
 
-Transaction::Transaction(string newName,int newNum,
+Transaction::Transaction(string newName,int newQuantity,
 			   dollars newPrice,int newMember) //Specified inititallization of values in transaction class
 {
 	theItem.name = newName;
-	theItem.num = newNum;
+	theItem.quantity = newQuantity;
 	theItem.price = newPrice;
 	memberNum = newMember;
 
@@ -24,7 +24,7 @@ Transaction::Transaction(string newName,int newNum,
 
 }
 
-Transaction::~Transaction() //Deconstructor
+Transaction::~Transaction() //Destructor
 {
 
 }
@@ -35,17 +35,17 @@ Item Transaction::GetItem()
 }
 
 void Transaction::SetItem(string newName,
-			  int newNum,
+			  int newQuantity,
 			  float newPrice)
 {
 	theItem.name = newName;
-	theItem.num = newNum;
+	theItem.quantity = newQuantity;
 	theItem.price = newPrice;
 }
 
 void Transaction::PrintItem()
 {
-	cout << theItem.name << ' ' << theItem.num << ' ' << theItem.price; //Subject to change based on formatting
+	cout << theItem.name << ' ' << theItem.quantity << ' ' << theItem.price; //Subject to change based on formatting
 }
 
 int Transaction::GetMemberNum()

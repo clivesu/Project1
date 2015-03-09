@@ -24,13 +24,13 @@ BasicMember* MemberList::FindNode(int memberNum) const
 	return finder;
 }
 
-void MemberList::AddNode(string newName, int newNum, int newMonth, int newDay, int newYear, dollars newTotal)
+void MemberList::AddNode(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal)
 {
 
 	BasicMember* newNode;
 	newNode = new BasicMember;
 	//the new node should be initialized from input here
-	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newType, newTotal = 0);
 
 	if(head == NULL)
 	{

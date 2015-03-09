@@ -9,6 +9,7 @@
 
 class TransactionList
 {
+public:
 	TransactionList();
 	~TransactionList();
 
@@ -16,11 +17,17 @@ class TransactionList
 	Transaction* FindItemNode(string searchName) const;	//Searched for and returns a node based on item name
 	Transaction* FindItemNode(int searchItemNum) const;	//Searched for and returns a node based on item num
 
-	void AddNode();				//Creates a new Transaction node
+	void AddNode();
+	void AddNode(Transaction newTransaction);
+
 	void DeleteNode(Transaction* target);	//Deletes a chosen Transaction node
 
 	void OutputList();	//Outputs the entire Transaction list
 	void DeleteList();	//Clears the entire Transaction list
+
+	void CopyList(TransactionList otherList);
+
+	dollars TotalAmount();
 
 private:
 	Transaction* head;	//The head of the list

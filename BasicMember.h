@@ -1,6 +1,7 @@
 #ifndef BASICMEMBER_H_
 #define BASICMEMBER_H_
 #include "MainHeader.h"
+#include "TransactionList.h"
 #include "Date.h"
 #include <string>
 #include <iostream>
@@ -18,6 +19,8 @@ public:
 
 	BasicMember();
 	virtual ~BasicMember();
+	BasicMember(const BasicMember& otherMember);
+
 	//Accessors
 	string GetName();
 	int GetMemberNum();
@@ -26,6 +29,7 @@ public:
 	memberType GetType();
 	BasicMember* GetNext();
 	BasicMember* GetPrev();
+	TransactionList GetPurchaseList();
 
 	//Mutators
 	void SetName(string newName);
@@ -37,16 +41,21 @@ public:
 	void SetPrev(BasicMember* newPrev);
 	virtual void SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal = 0);
 	virtual void OutputMemberInfo();
-	//void OutputTransactionList();
-	//virtual void AddTransaction(Transaction newTransaction);
+	void OutputTransactionList();
+	virtual void AddTransaction(Transaction newTransaction);
+
+	bool RightType();
+
+	virtual dollars GetRebate();
+	virtual void CopyMember(BasicMember otherMember);
 
 private:
 	string name;
 	int memberNum;
 	Date expirationDate;
-	dollars totalSpent;
 	memberType type;
-	//TransactionList purchaseList;
+	dollars totalSpent;
+	TransactionList purchaseList;
 	BasicMember* next;
 	BasicMember* prev;
 };

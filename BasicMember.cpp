@@ -10,8 +10,25 @@ BasicMember::BasicMember():name(""), memberNum(0), expirationDate(1,1,1900), typ
 
 BasicMember::~BasicMember()
 {
-//use Deletelist function from purchaseList
+	purchaseList.DeleteList();
 }
+
+BasicMember::BasicMember(const BasicMember& otherMember)
+{
+	purchaseList.CopyList(otherMember.purchaseList);
+
+	name = otherMember.name;
+	memberNum = otherMember.memberNum;
+	expirationDate = otherMember.expirationDate;
+	type = otherMember.type;
+	totalSpent = otherMember.totalSpent;
+
+	next = NULL;
+	prev = NULL;
+
+
+}
+
 
 string BasicMember::GetName()
 {
@@ -46,6 +63,11 @@ BasicMember* BasicMember::GetPrev()
 memberType BasicMember::GetType()
 {
 	return type;
+}
+
+TransactionList BasicMember::GetPurchaseList()
+{
+	return purchaseList;
 }
 
 void BasicMember::SetName(string newName)
@@ -102,4 +124,64 @@ void BasicMember::OutputMemberInfo()
 	cout << endl;
 	cout << "Total Amount Spent: " << totalSpent << endl;
 
+}
+
+void BasicMember::OutputTransactionList()
+{
+	cout << "Purchases for " << name << endl;
+	purchaseList.OutputList();
+}
+
+void BasicMember::AddTransaction(Transaction newTransaction)
+{
+	purchaseList.AddNode(newTransaction);
+
+	totalSpent = totalSpent + newTransaction.GetItem().price;
+}
+
+
+bool BasicMember::RightType()
+{
+	if(type == BASIC)
+		//Basic Members
+	{
+		if(totalSpent < (PREFERRED_DUES - BASIC_DUES)/PREFERRED_REBATE)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+		//Preferred Members
+	{
+		if(totalSpent > (PREFERRED_DUES - BASIC_DUES)/PREFERRED_REBATE)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+dollars BasicMember::GetRebate()
+{
+	return 0;
+}
+
+void BasicMember::CopyMember(BasicMember otherMember)
+{
+	purchaseList.CopyList(otherMember.purchaseList);
+
+	name = otherMember.GetName();
+	memberNum = otherMember.GetMemberNum();
+	expirationDate = otherMember.GetExpirationDate();
+	type = otherMember.GetType();
+	totalSpent = otherMember.GetTotalSpent();
+
+	//Does not alter next and prev
 }

@@ -3,6 +3,6 @@
 struct Item
 {
 	string name;
-	int num;
+	int quantity;
 	dollars price;
 };

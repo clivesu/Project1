@@ -45,7 +45,7 @@ Transaction* TransactionList::FindItemNode(int searchItemNum) const
 
 	finder = head;
 
-	while(finder!= NULL && finder->GetItem().num != searchItemNum)
+	while(finder!= NULL && finder->GetItem().quantity != searchItemNum)
 	{
 		finder = finder->GetNext();
 	}
@@ -56,7 +56,6 @@ Transaction* TransactionList::FindItemNode(int searchItemNum) const
 
 void TransactionList::AddNode()
 {
-	// MUST BE FIXED
 
 	Transaction* newNode;
 
@@ -64,15 +63,35 @@ void TransactionList::AddNode()
 
 	//FILE INPUT NEEDED
 
-	head = newNode;
-	newNode = NULL;
+	newNode->SetNext(head);
+
 
 	if(head->GetNext() != NULL)
 	{
-		head->GetNext()->SetPrev(head);
+		head->GetNext()->SetPrev(newNode);
 	}
 
+	head = newNode;
 
+}
+
+void TransactionList::AddNode(Transaction NewTransaction)
+{
+	Transaction* newNode;
+
+	newNode = new Transaction;
+
+	*newNode = NewTransaction;
+
+	newNode->SetNext(head);
+
+
+	if(head->GetNext() != NULL)
+	{
+		head->GetNext()->SetPrev(newNode);
+	}
+
+	head = newNode;
 }
 
 void TransactionList::DeleteNode(Transaction* target)
@@ -120,4 +139,58 @@ void TransactionList::DeleteList()
 		head = deleter;
 	}
 
+}
+
+void TransactionList::CopyList(TransactionList otherList)
+{
+	// A deep copy method, creates a copy of another TransactionList
+
+	Transaction* current;		// Used to traverse the list, and build the list;
+	Transaction* newNode;
+	Transaction* otherCurrent;	// Used to traverse the otherList
+
+	DeleteList();
+	head = NULL;
+
+	otherCurrent = otherList.head;
+
+	if(otherCurrent != NULL)
+	{
+		newNode = new Transaction;
+		current = newNode;
+		*current = *otherCurrent;
+		head = current;
+		current->SetNext(NULL);
+		otherCurrent = otherCurrent->GetNext();
+		while(otherCurrent != NULL)
+		{
+			newNode = new Transaction;
+			*newNode = *otherCurrent;
+			current->SetNext(newNode);
+			newNode->SetPrev(current);
+			newNode->SetNext(NULL);
+
+			current = current->GetNext();
+			otherCurrent = otherCurrent->GetNext();
+		}
+	}
+
+}
+
+dollars TransactionList::TotalAmount()
+{
+	Transaction* finder;
+
+	dollars total;
+	total = 0;
+
+	finder = head;
+
+	while(finder!= NULL)
+	{
+		total = total + finder->GetItem().price;
+		finder = finder->GetNext();
+	}
+
+	return total;
 }
