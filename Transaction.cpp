@@ -1,27 +1,13 @@
 #include "Transaction.h"
 
-Transaction::Transaction()	//Basic initiallization of values in transaction class
+Transaction::Transaction()
 {
-	theItem.name = ' ';
-	theItem.num = 0;
-	theItem.price = 0.0;
-	memberNum = 0;
-
-	next = NULL;
-	prev = NULL;
-}
-
-Transaction::Transaction(string newName,int newNum,
-			   dollars newPrice,int newMember) //Specified inititallization of values in transaction class
-{
-	theItem.name = newName;
-	theItem.num = newNum;
-	theItem.price = newPrice;
-	memberNum = newMember;
-
-	next = NULL;
-	prev = NULL;
-
+	boughtDate = Date(1,1,1900);
+	itemName   = "none";
+	price      = 0;
+	quanity    = 0;
+	next 	   = NULL;
+	prev 	   = NULL;
 }
 
 Transaction::~Transaction() //Deconstructor
@@ -29,38 +15,24 @@ Transaction::~Transaction() //Deconstructor
 
 }
 
-Item Transaction::GetItem()
+void Transaction::SetItem(int newMonth, int newDay, int newYear,
+						  string newName, dollars newPrice,int newAmount)
 {
-	return theItem;
-}
 
-void Transaction::SetItem(string newName,
-			  int newNum,
-			  float newPrice)
-{
-	theItem.name = newName;
-	theItem.num = newNum;
-	theItem.price = newPrice;
+		boughtDate = Date(newDay, newMonth, newYear);
+		itemName   = newName;
+		price      = newPrice;
+		quanity    = newAmount;
 }
 
 void Transaction::PrintItem()
 {
-	cout << theItem.name << ' ' << theItem.num << ' ' << theItem.price; //Subject to change based on formatting
-}
-
-int Transaction::GetMemberNum()
-{
-	return memberNum;
-}
-
-void Transaction::SetMemberNum(int newMemberNum)
-{
-	memberNum = newMemberNum;
-}
-
-void Transaction::PrintMemberNum()
-{
-	cout << memberNum;
+	cout << "Date Bought: ";
+	boughtDate.DisplayDate();
+	cout << endl;
+	cout << "Item:        " << itemName << endl;
+	cout << "Price:       " << price    << endl;
+	cout << "Quanity:     " << quanity  << endl << endl;
 }
 
 Transaction* Transaction::GetNext()

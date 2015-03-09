@@ -1,38 +1,29 @@
-
-
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
 
-#include "Item.cpp"
+#include <iostream>
 #include "Date.h"
+using namespace std;
 
 class Transaction
 {
 public:
 	Transaction();
-	Transaction(string newName, int newNum,
-		    dollars newPrice, int newMember);
-	~Transaction();
-
-	Item GetItem();
-	void SetItem(string newName, int newItemNum, float newPrice);	//Sets the name, number, and price of an item
-	void PrintItem();		//Outputs the name, number and price of an item
-	int GetMemberNum();			//Returns the members number
-	void SetMemberNum(int newMemberNum);	//Sets the members number
-	void PrintMemberNum();			//Outputs the members number
-
+	virtual ~Transaction();
+	virtual void SetItem(int newMonth, int newDay, int newYear, string newName,
+				 dollars newPrice,int newAmount);
+	virtual void PrintItem(); //Outputs the name, number and price of an item
 	Transaction* GetNext();
-	void SetNext(Transaction *newNext);
+	void SetNext(Transaction* newNext);
 	Transaction* GetPrev();
-	void SetPrev(Transaction *newPrev);
-
+	void SetPrev(Transaction* newPrev);
 private:
-	int memberNum;
-	Item theItem;
-	Date theDate;
+	Date    boughtDate;
+	string  itemName;
+	dollars price;
+	int		quanity;
 	Transaction *next;
 	Transaction *prev;
 };
-#endif
 
-
+#endif /* TRANSACTION_H_ */

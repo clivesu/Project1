@@ -2,7 +2,7 @@
 
 PreferredMember::PreferredMember() : BasicMember(), rebate(0)
 {
-
+	rebate = 0;
 }
 
 PreferredMember::~PreferredMember()
@@ -11,8 +11,8 @@ PreferredMember::~PreferredMember()
 }
 void PreferredMember::OutputMemberInfo()
 {
-BasicMember::OutputMemberInfo();
-cout << rebate << endl;
+	BasicMember::OutputMemberInfo();
+	cout << "Rebate Amount: " << rebate << endl;
 }
 //void PreferredMember::AddTransaction(Transaction newTransaction)
 //{
@@ -20,13 +20,14 @@ cout << rebate << endl;
 // Overrides the BasicMember method, but includes rebate
 //}
 
-void PreferredMember::SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal, dollars newRebate)
+void PreferredMember::SetAll(string newName, int newNum, int newMonth,
+		     int newDay, int newYear, dollars newTotal, dollars newRebate)
 {
-BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear, newType,newTotal);
-rebate = newRebate;
-}
-dollars PreferredMember::GetRebate()
-{
-return rebate;
+	BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear,newTotal);
+	rebate = newRebate;
 }
 
+dollars PreferredMember::GetRebate()
+{
+	return rebate;
+}

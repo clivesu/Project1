@@ -10,69 +10,30 @@ TransactionList::~TransactionList()
 	DeleteList();
 }
 
-Transaction* TransactionList::FindMemberNode(int searchMemberNum) const
+void TransactionList::AddNode(int newMonth, int newDay, int newYear,
+							string newName, dollars newPrice,int newAmount)
 {
+	Transaction* newItem;
+	newItem = new Transaction;
+	newItem->SetItem(newMonth,newDay,newYear,newName,newPrice,newAmount);
 
-	Transaction* finder;
-
-	finder = head;
-
-	while(finder!= NULL && finder->GetMemberNum() != searchMemberNum)
+	if(head == NULL)
 	{
-		finder = finder->GetNext();
+		head = newItem;
 	}
 
-	return finder;
-}
-
-Transaction* TransactionList::FindItemNode(string searchName) const
-{
-	Transaction* finder;
-
-	finder = head;
-
-	while(finder!= NULL && finder->GetItem().name != searchName)
+	else
 	{
-		finder = finder->GetNext();
+		Transaction* current;
+		current = head;
+		while(current->GetNext() != NULL)
+		{
+			current = current->GetNext();
+		}
+		current->SetNext(newItem);
+		newItem->SetPrev(current);
+		newItem->SetNext(NULL);
 	}
-
-	return finder;
-}
-
-Transaction* TransactionList::FindItemNode(int searchItemNum) const
-{
-	Transaction* finder;
-
-	finder = head;
-
-	while(finder!= NULL && finder->GetItem().num != searchItemNum)
-	{
-		finder = finder->GetNext();
-	}
-
-	return finder;
-}
-
-
-void TransactionList::AddNode()
-{
-	// MUST BE FIXED
-
-	Transaction* newNode;
-
-	newNode = new Transaction;
-
-	//FILE INPUT NEEDED
-
-	head = newNode;
-	newNode = NULL;
-
-	if(head->GetNext() != NULL)
-	{
-		head->GetNext()->SetPrev(head);
-	}
-
-
 }
 
 void TransactionList::DeleteNode(Transaction* target)
@@ -97,13 +58,11 @@ void TransactionList::DeleteNode(Transaction* target)
 void TransactionList::OutputList()
 {
 	Transaction* traverser;
-
 	traverser = head;
 
 	while(traverser != NULL)
 	{
 		traverser->PrintItem();
-		traverser->PrintMemberNum();
 		traverser = traverser->GetNext();
 	}
 }
@@ -121,3 +80,4 @@ void TransactionList::DeleteList()
 	}
 
 }
+
