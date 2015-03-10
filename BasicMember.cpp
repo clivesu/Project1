@@ -115,6 +115,16 @@ void BasicMember::SetAll(string newName, int newNum, int newMonth, int newDay, i
 
 }
 
+void BasicMember::SetAll(string newName, int newNum, int newMonth,
+						 int newDay, int newYear, dollars newTotal)
+{
+	name = newName;
+	memberNum = newNum;
+	expirationDate = Date(newDay, newMonth, newYear);
+	totalSpent = newTotal;
+}
+
+
 void BasicMember::OutputMemberInfo()
 {
 	cout << "Name: " << name << endl;
@@ -184,4 +194,11 @@ void BasicMember::CopyMember(BasicMember otherMember)
 	totalSpent = otherMember.GetTotalSpent();
 
 	//Does not alter next and prev
+}
+
+void BasicMember::AddTransaction(int newMonth, int newDay,int newYear,
+							string newName,dollars newPrice,int newAmount)
+{
+	purchaseList.AddNode(newMonth,newDay,newYear,newName,
+						 newPrice,newAmount);
 }

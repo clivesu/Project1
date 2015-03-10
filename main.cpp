@@ -18,7 +18,7 @@ int main()
 
 	cout << "INTRO MESSAGE\n\n";
 
-	cout << "Hello, what kind of user are you?\n";
+	cout << "\nHello, what kind of user are you?\n";
 	cout << "1. Customer at Bulk Club\n";
 	cout << "2. Employee at Bulk Club\n";
 
@@ -28,7 +28,7 @@ int main()
 	{
 	case 1: //customer
 			{
-				cout << "Hello Customer, what would you like to do?\n";
+				cout << "\nHello Customer, what would you like to do?\n";
 				cout << "1. List My Purchases\n";
 				cout << "2. Check whether I should change membership type\n";
 				cout << "3. See Customer Info\n";
@@ -48,7 +48,7 @@ int main()
 			break;
 	case 2:
 			{
-				cout << "Hello Employee, what would you like to do?\n";
+				cout << "\nHello Employee, what would you like to do?\n";
 				cout << "1. See Sales Data\n";
 				cout << "2. See Customer Data\n";
 				choice = GetAndCheckInt(1, 2, "Please Enter Your Selection: ");
@@ -56,7 +56,7 @@ int main()
 				{
 				case 1: //Sales Data Options
 						{
-							cout << "What type of customer data would you like to see?\n";
+							cout << "\nWhat type of customer data would you like to see?\n";
 							cout << "1. Generate Daily Sales Report\n";
 							cout << "2. Generate Total Sales Report\n";
 							choice = GetAndCheckInt(1, 3, "Please Enter Your Selection: ");
@@ -73,7 +73,7 @@ int main()
 					break;
 				case 2: //Customer Data Options
 				{
-					cout << "What type of customer options would you like to perform?\n";
+					cout << "\nWhat type of customer options would you like to perform?\n";
 					cout << "1. Add Customer\n";
 					cout << "2. Delete Customer\n";
 					cout << "3. See Member Rebates\n";

@@ -40,6 +40,10 @@ public:
 	void SetNext(BasicMember* newNext);
 	void SetPrev(BasicMember* newPrev);
 	virtual void SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal = 0);
+	virtual void SetAll(string newName, int newNum, int newMonth,
+							 int newDay, int newYear, dollars newTotal);
+	virtual void AddTransaction(int newMonth, int newDay,int newYear,
+								string newName,dollars newPrice,int newAmount);
 	virtual void OutputMemberInfo();
 	void OutputTransactionList();
 	virtual void AddTransaction(Transaction newTransaction);

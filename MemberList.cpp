@@ -48,6 +48,51 @@ void MemberList::AddNode(string newName, int newNum, int newMonth, int newDay, i
 		newNode->SetPrev(current);
 	}
 }
+
+void MemberList::AddNode(string newName, int newNum, string newType,
+		          int newMonth, int newDay, int newYear, dollars newTotal)
+{
+
+	BasicMember* newNode;
+
+	if(newType == "Basic")
+	{
+	newNode = new BasicMember;
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	}
+
+	if(newType == "Preferred")
+	{
+	newNode = new PreferredMember;
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	}
+
+	if(head == NULL)
+	{
+		head = newNode;
+	}
+
+	else
+	{
+		BasicMember* current;
+		current = head;
+
+		while(current->GetNext() != NULL)
+		{
+			current = current->GetNext();
+		}
+
+		current->SetNext(newNode);
+		newNode->SetPrev(current);
+		newNode->SetNext(NULL);
+	}
+}
+
+
+
+
+
+
 void MemberList::DeleteNode(BasicMember* target)
 {
 	if(target->GetNext() != NULL)
@@ -86,5 +131,31 @@ void MemberList::DeleteList()
 		deleter = head->GetNext();
 		delete head;
 		head = deleter;
+	}
+}
+
+void MemberList::AddItem(int newMonth,int newDay,int newYear,int newId,
+						 string newName,dollars newPrice,int newAmount)
+{
+	BasicMember* current;
+	current    = head;
+	bool found = false;
+
+	while(current != NULL and found == false)
+	{
+		if(current->GetMemberNum() == newId)
+		{
+		current->AddTransaction(newMonth,newDay,newYear,newName,
+								newPrice,newAmount);
+		found = true;
+		}
+		else
+		{
+		current = current->GetNext();
+		}
+	}
+	if(found == false)
+	{
+		cout << "Invaid Member Number!!! " << endl;
 	}
 }
