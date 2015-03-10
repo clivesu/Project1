@@ -5,7 +5,6 @@ Bulk Club
 
 Team Members:
 Clive Su - Product Owner
-Jordan - Scrum Master
-Andrew Truong 
+Andrew Truong - Scrum Master
 
 Objectives
