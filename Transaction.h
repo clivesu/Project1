@@ -16,7 +16,13 @@ public:
 	Transaction* GetNext();
 	void SetNext(Transaction* newNext);
 	Transaction* GetPrev();
+	Date GetDate();
 	void SetPrev(Transaction* newPrev);
+	void PrintItemName();
+	void PrintPrice();
+	void PrintQuanity();
+	void PrintDate();
+
 private:
 	Date    boughtDate;
 	string  itemName;

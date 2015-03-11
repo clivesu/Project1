@@ -1,8 +1,10 @@
 #include "TransactionList.h"
+#include <iomanip>
 
 TransactionList::TransactionList()
 {
-	head = NULL;
+	head  = NULL;
+	total = 0;
 }
 
 TransactionList::~TransactionList()
@@ -16,6 +18,7 @@ void TransactionList::AddNode(int newMonth, int newDay, int newYear,
 	Transaction* newItem;
 	newItem = new Transaction;
 	newItem->SetItem(newMonth,newDay,newYear,newName,newPrice,newAmount);
+	total = total + (newPrice * newAmount);
 
 	if(head == NULL)
 	{
@@ -67,6 +70,32 @@ void TransactionList::OutputList()
 	}
 }
 
+void TransactionList::DailyOutputList()
+{
+	Transaction* traverser;
+	traverser = head;
+	traverser->PrintDate();
+
+	cout << left;
+	cout << setw(25) <<"Item"     << setw(10) << "Price"
+		 << setw(10) << "Quanity" << endl;
+
+	while(traverser != NULL)
+	{
+		cout << setw(25);
+		traverser->PrintItemName();
+		cout << setw(10);
+
+		traverser->PrintPrice();
+		cout << setw(10);
+		traverser->PrintQuanity();
+		traverser = traverser->GetNext();
+		cout << endl;
+	}
+	cout << right;
+}
+
+
 void TransactionList::DeleteList()
 {
 	Transaction* deleter;
@@ -78,6 +107,36 @@ void TransactionList::DeleteList()
 		delete head;
 		head = deleter;
 	}
+}
+
+void TransactionList::CopyList(TransactionList copyList)
+{
 
 }
 
+double TransactionList::GetTotal()
+{
+	return total;
+}
+
+bool TransactionList::FindDate(Date searchDate)
+{
+	Transaction* traverser;
+	traverser = head;
+	bool found = false;
+	Date temp;
+
+	while(traverser != NULL && found == false)
+	{
+
+		temp = traverser->GetDate();
+
+		if(temp == searchDate)
+		{
+			found = true;
+		}
+		traverser = traverser->GetNext();
+	}
+
+	return found;
+}

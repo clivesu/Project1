@@ -54,3 +54,29 @@ void Transaction::SetPrev(Transaction *newPrev)
 {
 	prev = newPrev;
 }
+
+void Transaction::PrintItemName()
+{
+	cout << itemName;
+}
+
+void Transaction::PrintPrice()
+{
+	cout << price;
+}
+
+void Transaction::PrintQuanity()
+{
+	cout << quanity;
+}
+
+void Transaction::PrintDate()
+{
+	boughtDate.DisplayDate();
+	cout << endl;
+}
+
+Date Transaction::GetDate()
+{
+	return boughtDate;
+}

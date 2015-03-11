@@ -15,7 +15,7 @@ MemberList::~MemberList()
 	DeleteList();
 }
 
-BasicMember* MemberList::FindNode(int memberNum) const
+BasicMember* MemberList::FindMember(int memberNum) const
 {
 	BasicMember* finder;
 	finder = head;
@@ -27,7 +27,7 @@ BasicMember* MemberList::FindNode(int memberNum) const
 	return finder;
 }
 
-void MemberList::AddNode(string newName, int newNum, string newType,
+void MemberList::AddMember(string newName, int newNum, string newType,
 		          int newMonth, int newDay, int newYear, dollars newTotal)
 {
 
@@ -36,13 +36,15 @@ void MemberList::AddNode(string newName, int newNum, string newType,
 	if(newType == "Basic")
 	{
 	newNode = new BasicMember;
-	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear, BASIC,
+					newTotal = 0);
 	}
 
 	if(newType == "Preferred")
 	{
 	newNode = new PreferredMember;
-	newNode->SetAll(newName,newNum,newMonth,newDay,newYear,newTotal = 0);
+	newNode->SetAll(newName,newNum,newMonth,newDay,newYear, PREFERRED,
+					newTotal = 0);
 	}
 
 	if(head == NULL)
@@ -63,6 +65,48 @@ void MemberList::AddNode(string newName, int newNum, string newType,
 		current->SetNext(newNode);
 		newNode->SetPrev(current);
 		newNode->SetNext(NULL);
+	}
+}
+
+void MemberList::DeleteMember(BasicMember* target)
+{
+	if(target->GetNext() != NULL)
+	{
+		target->GetNext()->SetPrev(target->GetPrev());
+	}
+	if(target->GetPrev() != NULL)
+	{
+		target->GetPrev()->SetNext(target->GetNext());
+	}
+	else
+	{
+		head = target->GetNext();
+	}
+	delete target;
+}
+
+
+void MemberList::OutputList()
+{
+
+	BasicMember* traverser;
+	traverser = head;
+	while(traverser != NULL)
+	{
+		traverser->OutputMemberInfo();
+		cout << endl;
+		traverser = traverser->GetNext();
+	}
+}
+
+void MemberList::DeleteList()
+{
+	BasicMember* deleter;
+	while(head!= NULL)
+	{
+		deleter = head->GetNext();
+		delete head;
+		head = deleter;
 	}
 }
 
@@ -120,6 +164,7 @@ void MemberList::OutputItemList(int newId)
 
 void MemberList::FindExpire(int month)
 {
+
 	BasicMember* current;
 	current   = head;
 	bool fact = false;
@@ -131,11 +176,11 @@ void MemberList::FindExpire(int month)
 			current->OutputMemberInfo();
 			if(typeid(*current) == typeid(BasicMember))
 			{
-				cout << "Renew price: $55.00" << endl;
+				cout << "Renew price: $" << BASIC_DUES << endl;
 			}
 			if(typeid(*current) == typeid(PreferredMember))
 			{
-				cout << "Renew price: $95.00" << endl;
+				cout << "Renew price: $" << PREFERRED_DUES << endl;
 			}
 			cout << endl;
 			fact = true;
@@ -147,45 +192,54 @@ void MemberList::FindExpire(int month)
 	{
 		cout << "No members expired in this month" << endl;
 	}
-
 }
 
-void MemberList::DeleteNode(BasicMember* target)
+void MemberList::PrintRebates()
 {
-	if(target->GetNext() != NULL)
-	{
-		target->GetNext()->SetPrev(target->GetPrev());
-	}
-	if(target->GetPrev() != NULL)
-	{
-		target->GetPrev()->SetNext(target->GetNext());
-	}
-	else
-	{
-		head = target->GetNext();
-	}
-	delete target;
-}
+	BasicMember* current;
+	current   = head;
 
-void MemberList::OutputList()
-{
-	BasicMember* traverser;
-	traverser = head;
-	while(traverser != NULL)
+	while(current != NULL)
 	{
-		traverser->OutputMemberInfo();
-		cout << endl;
-		traverser = traverser->GetNext();
+		if(typeid(*current) == typeid(PreferredMember))
+		{
+			cout << endl;
+			current->OutputMemberInfo();
+		}
+		current = current->GetNext();
 	}
 }
 
-void MemberList::DeleteList()
+
+void MemberList::DailyShopper(Date checkDate)
 {
-	BasicMember* deleter;
-	while(head!= NULL)
+	int basicCount     = 0;
+	int preferredCount = 0;
+	BasicMember* current;
+	current = head;
+	cout << endl << endl << "Members who shopped on ";
+	checkDate.DisplayDate();
+	cout << endl;
+
+	while(current != NULL)
 	{
-		deleter = head->GetNext();
-		delete head;
-		head = deleter;
+		if(current->FindDate(checkDate) == true)
+		{
+			cout << current->GetName() << endl;
+
+			if(typeid(*current) == typeid(PreferredMember))
+			{
+				preferredCount++;
+			}
+			if(typeid(*current) == typeid(BasicMember))
+			{
+				basicCount++;
+			}
+		}
+		current = current->GetNext();
 	}
+	cout << endl;
+	cout << "Basic Member count:     " << basicCount << endl;
+	cout << "Preferred Member count: " << preferredCount << endl;
 }
+
