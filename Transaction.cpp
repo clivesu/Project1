@@ -1,7 +1,5 @@
 #include "Transaction.h"
 
-#include "Transaction.h"
-
 Transaction::Transaction()
 {
 	boughtDate = Date(1,1,1900);
@@ -37,16 +35,6 @@ void Transaction::PrintItem()
 	cout << "Quanity:     " << quanity  << endl << endl;
 }
 
-string Transaction::GetName()
-{
-	return itemName;
-}
-
-dollars Transaction::GetPrice()
-{
-	return price;
-}
-
 Transaction* Transaction::GetNext()
 {
 	return next;
@@ -67,5 +55,28 @@ void Transaction::SetPrev(Transaction *newPrev)
 	prev = newPrev;
 }
 
+void Transaction::PrintItemName()
+{
+	cout << itemName;
+}
 
+void Transaction::PrintPrice()
+{
+	cout << price;
+}
 
+void Transaction::PrintQuanity()
+{
+	cout << quanity;
+}
+
+void Transaction::PrintDate()
+{
+	boughtDate.DisplayDate();
+	cout << endl;
+}
+
+Date Transaction::GetDate()
+{
+	return boughtDate;
+}

@@ -2,49 +2,39 @@
 
 PreferredMember::PreferredMember() : BasicMember(), rebate(0)
 {
-
+	rebate = 0;
 }
 
 PreferredMember::~PreferredMember()
 {
-
-}
-
-PreferredMember::PreferredMember(const PreferredMember& otherMember)
-{
-
-
+// does nothing
 }
 
 void PreferredMember::OutputMemberInfo()
 {
 	BasicMember::OutputMemberInfo();
-	cout << rebate << endl;
+	GetRebate();
+	cout << "Rebate Amount: $" << rebate << endl;
+
 }
 
 void PreferredMember::AddTransaction(Transaction newTransaction)
 {
-	BasicMember::AddTransaction(newTransaction);
-
-	rebate = rebate + (newTransaction.GetPrice() * PREFERRED_REBATE);
-
+ //need transaction type
+// Overrides the BasicMember method, but includes rebate
 }
 
-void PreferredMember::SetAll(string newName, int newNum, int newMonth, int newDay, int newYear, memberType newType, dollars newTotal, dollars newRebate)
+void PreferredMember::SetAll(string newName, int newNum, int newMonth,
+		     int newDay, int newYear, memberType newType, dollars newTotal, dollars newRebate)
 {
-	BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear, newType,newTotal);
+	BasicMember::SetAll(newName,newNum,newMonth,newDay,newYear, newType, newTotal);
 	rebate = newRebate;
 }
 
 dollars PreferredMember::GetRebate()
 {
+	rebate = GetTotalSpent() * PREFERRED_REBATE;
 	return rebate;
 }
 
-void PreferredMember::CopyMember(PreferredMember otherMember)
-{
-	BasicMember::CopyMember(otherMember);
-	rebate = otherMember.GetRebate();
 
-	//Does not alter next and prev
-}

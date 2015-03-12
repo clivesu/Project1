@@ -1,61 +1,15 @@
 #include "TransactionList.h"
-
-
-
-
-
-
-
-
+#include <iomanip>
 
 TransactionList::TransactionList()
 {
-	head = NULL;
+	head  = NULL;
+	total = 0;
 }
 
 TransactionList::~TransactionList()
 {
 	DeleteList();
-}
-
-
-
-Transaction* TransactionList::FindItemNode(string searchName) const
-{
-	Transaction* finder;
-
-	finder = head;
-
-	while(finder!= NULL && finder->GetName() != searchName)
-	{
-		finder = finder->GetNext();
-	}
-
-	return finder;
-}
-
-
-
-
-void TransactionList::AddNode()
-{
-
-	Transaction* newNode;
-
-	newNode = new Transaction;
-
-	//FILE INPUT NEEDED
-
-	newNode->SetNext(head);
-
-
-	if(head->GetNext() != NULL)
-	{
-		head->GetNext()->SetPrev(newNode);
-	}
-
-	head = newNode;
-
 }
 
 void TransactionList::AddNode(int newMonth, int newDay, int newYear,
@@ -64,6 +18,7 @@ void TransactionList::AddNode(int newMonth, int newDay, int newYear,
 	Transaction* newItem;
 	newItem = new Transaction;
 	newItem->SetItem(newMonth,newDay,newYear,newName,newPrice,newAmount);
+	total = total + (newPrice * newAmount);
 
 	if(head == NULL)
 	{
@@ -82,25 +37,6 @@ void TransactionList::AddNode(int newMonth, int newDay, int newYear,
 		newItem->SetPrev(current);
 		newItem->SetNext(NULL);
 	}
-}
-
-void TransactionList::AddNode(Transaction NewTransaction)
-{
-	Transaction* newNode;
-
-	newNode = new Transaction;
-
-	*newNode = NewTransaction;
-
-	newNode->SetNext(head);
-
-
-	if(head->GetNext() != NULL)
-	{
-		head->GetNext()->SetPrev(newNode);
-	}
-
-	head = newNode;
 }
 
 void TransactionList::DeleteNode(Transaction* target)
@@ -125,7 +61,6 @@ void TransactionList::DeleteNode(Transaction* target)
 void TransactionList::OutputList()
 {
 	Transaction* traverser;
-
 	traverser = head;
 
 	while(traverser != NULL)
@@ -134,6 +69,32 @@ void TransactionList::OutputList()
 		traverser = traverser->GetNext();
 	}
 }
+
+void TransactionList::DailyOutputList()
+{
+	Transaction* traverser;
+	traverser = head;
+	traverser->PrintDate();
+
+	cout << left;
+	cout << setw(25) <<"Item"     << setw(10) << "Price"
+		 << setw(10) << "Quanity" << endl;
+
+	while(traverser != NULL)
+	{
+		cout << setw(25);
+		traverser->PrintItemName();
+		cout << setw(10);
+
+		traverser->PrintPrice();
+		cout << setw(10);
+		traverser->PrintQuanity();
+		traverser = traverser->GetNext();
+		cout << endl;
+	}
+	cout << right;
+}
+
 
 void TransactionList::DeleteList()
 {
@@ -146,59 +107,36 @@ void TransactionList::DeleteList()
 		delete head;
 		head = deleter;
 	}
+}
+
+void TransactionList::CopyList(TransactionList copyList)
+{
 
 }
 
-void TransactionList::CopyList(TransactionList otherList)
+double TransactionList::GetTotal()
 {
-	// A deep copy method, creates a copy of another TransactionList
-
-	Transaction* current;		// Used to traverse the list, and build the list;
-	Transaction* newNode;
-	Transaction* otherCurrent;	// Used to traverse the otherList
-
-	DeleteList();
-	head = NULL;
-
-	otherCurrent = otherList.head;
-
-	if(otherCurrent != NULL)
-	{
-		newNode = new Transaction;
-		current = newNode;
-		*current = *otherCurrent;
-		head = current;
-		current->SetNext(NULL);
-		otherCurrent = otherCurrent->GetNext();
-		while(otherCurrent != NULL)
-		{
-			newNode = new Transaction;
-			*newNode = *otherCurrent;
-			current->SetNext(newNode);
-			newNode->SetPrev(current);
-			newNode->SetNext(NULL);
-
-			current = current->GetNext();
-			otherCurrent = otherCurrent->GetNext();
-		}
-	}
-}
-
-dollars TransactionList::TotalAmount()
-{
-	Transaction* finder;
-
-	dollars total;
-	total = 0;
-
-	finder = head;
-
-	while(finder!= NULL)
-	{
-		total = total + finder->GetPrice();
-		finder = finder->GetNext();
-	}
-
 	return total;
 }
 
+bool TransactionList::FindDate(Date searchDate)
+{
+	Transaction* traverser;
+	traverser = head;
+	bool found = false;
+	Date temp;
+
+	while(traverser != NULL && found == false)
+	{
+
+		temp = traverser->GetDate();
+
+		if(temp == searchDate)
+		{
+			found = true;
+		}
+		traverser = traverser->GetNext();
+	}
+
+	return found;
+}
