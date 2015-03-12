@@ -129,12 +129,17 @@ int main()
 	choice = GetAndCheckInt(1, 2, "Please Enter Your Selection: ");
 	switch(choice)
 	{
+
+	// Add place for user to specify whether reports are for basic/preferred/both
+
 	case 1: //Sales Data Options
 	{
 	cout << "\nWhat type of customer data would you like to see?\n";
 	cout << "1. Generate Daily Sales Report\n";
-	cout << "2. Generate Total Sales Report\n";
-	choice = GetAndCheckInt(1, 3, "Please Enter Your Selection: ");
+	cout << "2. Output All Sales Sorted by Member Number\n";
+	cout << "3. Output All Sales Sorted by Item Name\n";
+	cout << "4. Find Sales information for a Single Item\n";
+	choice = GetAndCheckInt(1, 4, "Please Enter Your Selection: ");
 	switch(choice)
 	{
 	case 1: //Daily
@@ -205,8 +210,12 @@ int main()
 		}
 	}
 	break;
-	case 2: //Total
-	break;
+	case 2: //All Sales Sorted by Member Number
+		break;
+	case 3: //All Sales Sorted by Item Name
+		break;
+	case 4: //Sales information for Single Item
+		break;
 	default:
 	break;
 	}
@@ -214,6 +223,8 @@ int main()
 	break;
 	case 2: //Customer Data Options
 	{
+
+
 	cout << "\nWhat type of customer options would you like to perform?\n";
 	cout << "1. Add Customer\n";
 	cout << "2. Delete Customer\n";
@@ -256,12 +267,12 @@ int main()
 	break;
 	}
 	cout << endl;
-	cout << "\nHello, what kind of user are you?\n";
+	cout << "\nHello, what kind of user are you? (enter 0 to exit program)\n";
 	cout << "1. Customer at Bulk Club\n";
 	cout << "2. Employee at Bulk Club\n";
-	cout << "0. Exit Program\n";
 	choice = GetAndCheckInt(0, 2, "Please Enter Your Selection: ");
 	}
 
 return 0;
 }
+
