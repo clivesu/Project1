@@ -77,12 +77,12 @@ void TransactionList::DailyOutputList()
 	traverser->PrintDate();
 
 	cout << left;
-	cout << setw(25) <<"Item"     << setw(10) << "Price"
+	cout << setw(30) <<"Item"     << setw(10) << "Price"
 		 << setw(10) << "Quanity" << endl;
 
 	while(traverser != NULL)
 	{
-		cout << setw(25);
+		cout << setw(30);
 		traverser->PrintItemName();
 		cout << setw(10);
 

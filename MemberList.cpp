@@ -174,11 +174,11 @@ void MemberList::FindExpire(int month)
 		if(current->GetMonthEx() == month)
 		{
 			current->OutputMemberInfo();
-			if(current->GetType() == BASIC)
+			if(typeid(*current) == typeid(BasicMember))
 			{
 				cout << "Renew price: $" << BASIC_DUES << endl;
 			}
-			if(current->GetType() == PREFERRED)
+			if(typeid(*current) == typeid(PreferredMember))
 			{
 				cout << "Renew price: $" << PREFERRED_DUES << endl;
 			}
@@ -201,7 +201,7 @@ void MemberList::PrintRebates()
 
 	while(current != NULL)
 	{
-		if(current->GetType() == PREFERRED)
+		if(typeid(*current) == typeid(PreferredMember))
 		{
 			cout << endl;
 			current->OutputMemberInfo();
@@ -227,11 +227,11 @@ void MemberList::DailyShopper(Date checkDate)
 		{
 			cout << current->GetName() << endl;
 
-			if(current->GetType() == PREFERRED)
+			if(typeid(*current) == typeid(PreferredMember))
 			{
 				preferredCount++;
 			}
-			if(current->GetType() == BASIC)
+			if(typeid(*current) == typeid(BasicMember))
 			{
 				basicCount++;
 			}
@@ -250,14 +250,12 @@ void MemberList::ManualAdd()
 	int memberNumber;
 	Date expiration;
 	BasicMember* finder;
-
 	int month;
 	int day;
 	int year;
 	string monthString;
 	string dayString;
 	string yearString;
-
 	cout << "\nWhat type of member would you like to add?\n";
 	cout << "1. Basic\n";
 	cout << "2. Preferred\n";
@@ -276,54 +274,115 @@ void MemberList::ManualAdd()
 
 	do
 	{
-	cout << "What is the expiration date of the new membership?(MM/DD/YYY)? ";
-	getline(cin, monthString, '/');
-	month = atoi(monthString.c_str());
-	getline(cin, dayString, '/');
-	day = atoi(dayString.c_str());
-	getline(cin, yearString);
-	year = atoi(yearString.c_str());
-	expiration = Date(day, month, year);
+		cout << "What is the expiration date of the new membership?(MM/DD/YYY)? ";
+		getline(cin, monthString, '/');
+		month = atoi(monthString.c_str());
+		getline(cin, dayString, '/');
+		day = atoi(dayString.c_str());
+		getline(cin, yearString);
+		year = atoi(yearString.c_str());
+		expiration = Date(day, month, year);
 
-	if(!expiration.ValiDate())
-	{
-		cout << "The date is invalid. Please enter a valid date.";
-	}
-
+		if(!expiration.ValiDate())
+		{
+			cout << "The date is invalid. Please enter a valid date.";
+		}
 	}while(!expiration.ValiDate());
+
 	AddMember(name, memberNumber, type, month, day, year, 0);
 	cout << "New Member Added\n";
 	finder = head;
+
 	while(finder->GetNext() != NULL)
 	{
 		finder = finder->GetNext();
 	}
 	finder->OutputMemberInfo();
-
 }
-
 
 void MemberList::DeleteMember()
 {
 	int memberNumber;
 	BasicMember* target;
-
 	do
 	{
 		target = NULL;
-
 		cout << "Please enter the member number of the member you wish to delete.\n";
 		cout << "(Enter 0 to exit)\n";
-
 		//Should have error checking here
 		cin >> memberNumber;
-
 		target = FindMember(memberNumber);
 	}while(memberNumber != 0 && target == NULL);
+
 	if(target != NULL)
 	{
 		DeleteMember(target);
 		cout << "Member has been deleted.\n";
 	}
+}
 
+BasicMember* MemberList::FindMember(string memberName) const
+{
+	BasicMember* finder;
+	finder = head;
+	while(finder != NULL && finder->GetName() != memberName)
+	{
+		finder = finder->GetNext();
+	}
+
+	return finder;
+}
+
+int MemberList::GetCount()
+{
+	BasicMember* finder;
+	int count = 0;
+	finder = head;
+	while(finder != NULL)
+	{
+		finder = finder->GetNext();
+		count++;
+	}
+	return count;
+}
+
+void MemberList::SortID()
+{
+	int count;
+	BasicMember* temp;
+	temp  = head;
+	count = GetCount();
+	cout << count << endl;
+
+		for(int i = 1; i < count; i++)
+		{
+			if(temp->GetMemberNum() > temp->GetNext()->GetMemberNum())
+			{
+				cout << "here" << endl;
+				Swap(temp,temp->GetNext());
+			}
+			temp = temp->GetNext();
+		}
+
+
+
+}
+
+void MemberList::Swap(BasicMember* one, BasicMember* two)
+{
+	one->OutputMemberInfo();
+	two->OutputMemberInfo();
+	cout << endl;
+	BasicMember temp;
+	if(one == head);
+	{
+		two = head;
+	}
+	temp.SetNext(one->GetNext());
+	temp.SetPrev(one->GetPrev());
+
+	one->SetNext(two->GetNext());
+	one->SetPrev(two->GetPrev());
+	two->SetNext(temp.GetNext());
+	two->SetPrev(temp.GetPrev());
 }

@@ -2,8 +2,7 @@
 #define TRANSACTIONLIST_H_
 
 #include "Transaction.h"
-
-class TransactionList
+class TransactionList : public Transaction
 {
 public:
 	TransactionList();
@@ -17,7 +16,6 @@ public:
 	void   CopyList(TransactionList);
 	double GetTotal();
 	bool   FindDate(Date searchDate);
-
 
 private:
 	Transaction* head;

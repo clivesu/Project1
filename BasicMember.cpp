@@ -7,7 +7,7 @@ BasicMember::BasicMember():name(""), memberNum(0),
 						   expirationDate(1,1,1900), type(BASIC), totalSpent(0),
 						   next(NULL), prev(NULL)
 {
-//purchaseList will be initialized with its own constructor
+//purchaseList should be initialized with its own constructor
 }
 BasicMember::~BasicMember()
 {

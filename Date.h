@@ -27,8 +27,7 @@ void SetYear(int newYear);
 void IncrementDay();
 int MonthDifference(Date laterDate) const;
 bool ValiDate() const;
-bool operator ==(const Date&);
-
+bool operator==(const Date&);
 private:
 int day;
 int month;
