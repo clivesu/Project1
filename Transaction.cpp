@@ -1,7 +1,5 @@
 #include "Transaction.h"
 
-#include "Transaction.h"
-
 Transaction::Transaction()
 {
 	boughtDate = Date(1,1,1900);
@@ -16,6 +14,9 @@ Transaction::~Transaction() //Deconstructor
 {
 
 }
+
+
+
 
 void Transaction::SetItem(int newMonth, int newDay, int newYear,
 						  string newName, dollars newPrice,int newAmount)
@@ -35,16 +36,6 @@ void Transaction::PrintItem()
 	cout << "Item:        " << itemName << endl;
 	cout << "Price:       " << price    << endl;
 	cout << "Quanity:     " << quanity  << endl << endl;
-}
-
-string Transaction::GetName()
-{
-	return itemName;
-}
-
-dollars Transaction::GetPrice()
-{
-	return price;
 }
 
 Transaction* Transaction::GetNext()
@@ -67,5 +58,38 @@ void Transaction::SetPrev(Transaction *newPrev)
 	prev = newPrev;
 }
 
+string Transaction::GetItemName()
+{
+	return itemName;
+}
 
+void Transaction::SetItemName(string newName)
+{
+	itemName = newName;
+}
 
+void Transaction::PrintItemName()
+{
+	cout << itemName;
+}
+
+void Transaction::PrintPrice()
+{
+	cout << price;
+}
+
+void Transaction::PrintQuanity()
+{
+	cout << quanity;
+}
+
+void Transaction::PrintDate()
+{
+	boughtDate.DisplayDate();
+	cout << endl;
+}
+
+Date Transaction::GetDate()
+{
+	return boughtDate;
+}

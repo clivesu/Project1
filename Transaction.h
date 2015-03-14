@@ -1,11 +1,9 @@
-
-
 #ifndef TRANSACTION_H_
 #define TRANSACTION_H_
 
-#include "Item.cpp"
+#include <iostream>
 #include "Date.h"
-
+using namespace std;
 
 class Transaction
 {
@@ -15,16 +13,19 @@ public:
 	virtual void SetItem(int newMonth, int newDay, int newYear, string newName,
 				 dollars newPrice,int newAmount);
 	virtual void PrintItem(); //Outputs the name, number and price of an item
-
-	string GetName();
-	dollars GetPrice();
-
 	Transaction* GetNext();
 	void SetNext(Transaction* newNext);
 	Transaction* GetPrev();
+	Date GetDate();
 	void SetPrev(Transaction* newPrev);
 
+	string GetItemName();
+	void SetItemName(string newName);
 
+	void PrintItemName();
+	void PrintPrice();
+	void PrintQuanity();
+	void PrintDate();
 
 private:
 	Date    boughtDate;
@@ -35,9 +36,4 @@ private:
 	Transaction *prev;
 };
 
-
-
-
-#endif
-
-
+#endif /* TRANSACTION_H_ */

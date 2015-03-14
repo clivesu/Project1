@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+
 void ReadMembersFile(ifstream &infile, MemberList &list)
 {
 string id;
@@ -29,7 +30,7 @@ string year;
 			numDay = atoi(day.c_str());
 			getline(infile, year);
 			numYear = atoi(year.c_str());
-			list.AddNode(name,num,type,numMonth,numDay,numYear,0);
+			list.AddMember(name,num,type,numMonth,numDay,numYear,0);
 		}
 	}
 	else
@@ -40,7 +41,7 @@ string year;
 	infile.clear();
 }
 
-void ReadItemFile(ifstream &infile, MemberList &list)
+void ReadItemFile(ifstream &infile,MemberList &list,TransactionList &daily)
 {
 	string month;
 		string day;
@@ -78,6 +79,8 @@ void ReadItemFile(ifstream &infile, MemberList &list)
 
 				list.AddItem(numMonth,numDay,numYear,numId,item,numPrice,
 							 numAmount);
+				daily.AddNode(numMonth,numDay,numYear,item,numPrice,
+							numAmount);
 			}
 		}
 
