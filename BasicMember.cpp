@@ -24,10 +24,7 @@ BasicMember::BasicMember(const BasicMember& otherMember)
 	type = otherMember.type;
 	totalSpent = otherMember.totalSpent;
 
-	next = NULL;
-	prev = NULL;
 }
-
 
 string BasicMember::GetName()
 {
@@ -187,3 +184,4 @@ bool BasicMember::FindDate(Date searchDate)
 {
 	return purchaseList.FindDate(searchDate);
 }
+

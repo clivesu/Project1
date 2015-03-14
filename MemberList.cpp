@@ -348,20 +348,27 @@ int MemberList::GetCount()
 
 void MemberList::SortID()
 {
-	int count;
-	BasicMember* temp;
-	temp  = head;
-	count = GetCount();
-	cout << count << endl;
+	if(head == NULL)
+	{
+		return;
+	}
+	if(head->GetNext() == NULL)
+	{
+		return;
+	}
 
-		for(int i = 1; i < count; i++)
+	BasicMember* ptr;
+	ptr  = head;
+
+		while(ptr->GetNext() != NULL)
 		{
-			if(temp->GetMemberNum() > temp->GetNext()->GetMemberNum())
+			if(ptr->GetMemberNum() > ptr->GetNext()->GetMemberNum())
 			{
+				Swap(ptr,ptr->GetNext());
 				cout << "here" << endl;
-				Swap(temp,temp->GetNext());
 			}
-			temp = temp->GetNext();
+
+			ptr = ptr->GetNext();
 		}
 
 
@@ -370,19 +377,9 @@ void MemberList::SortID()
 
 void MemberList::Swap(BasicMember* one, BasicMember* two)
 {
-	one->OutputMemberInfo();
-	two->OutputMemberInfo();
-	cout << endl;
-	BasicMember temp;
-	if(one == head);
-	{
-		two = head;
-	}
-	temp.SetNext(one->GetNext());
-	temp.SetPrev(one->GetPrev());
-
-	one->SetNext(two->GetNext());
-	one->SetPrev(two->GetPrev());
-	two->SetNext(temp.GetNext());
-	two->SetPrev(temp.GetPrev());
+	BasicMember* temp;
+	temp = one;
+	one  = two;
+	two  = temp;
 }
+

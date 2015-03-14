@@ -220,7 +220,8 @@ int main()
 				case 2: //All Sales Sorted by Member Number
 				{
 					list.SortID();
-					list.OutputMemberInfo();
+					cout << endl << "New List: " << endl << endl;
+					list.OutputList();
 				}
 					break;
 				case 3: //All Sales Sorted by Item Name

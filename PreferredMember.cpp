@@ -37,4 +37,9 @@ dollars PreferredMember::GetRebate()
 	return rebate;
 }
 
+void PreferredMember::CopyMember(PreferredMember otherMember)
+{
+	rebate = otherMember.rebate;
+	BasicMember::CopyMember(otherMember);
+}
 

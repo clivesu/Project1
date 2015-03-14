@@ -111,7 +111,8 @@ void TransactionList::DeleteList()
 
 void TransactionList::CopyList(TransactionList copyList)
 {
-
+	head  = copyList.head;
+	total = copyList.total;
 }
 
 double TransactionList::GetTotal()
