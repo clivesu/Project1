@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+
 void ReadMembersFile(ifstream &infile, MemberList &list)
 {
 string id;
