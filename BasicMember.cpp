@@ -185,3 +185,4 @@ bool BasicMember::FindDate(Date searchDate)
 	return purchaseList.FindDate(searchDate);
 }
 
+

@@ -27,7 +27,9 @@ public:
 	void DeleteMember();
 	void SortID();
 	int  GetCount();
-	void Swap(BasicMember* one, BasicMember* two);
+	void Swap(BasicMember* one,   BasicMember* two);
+	double GrandTotal();
+
 
 private:
 	BasicMember* head;

@@ -348,6 +348,8 @@ int MemberList::GetCount()
 
 void MemberList::SortID()
 {
+	int count = GetCount();
+	int step = 1;
 	if(head == NULL)
 	{
 		return;
@@ -360,26 +362,71 @@ void MemberList::SortID()
 	BasicMember* ptr;
 	ptr  = head;
 
-		while(ptr->GetNext() != NULL)
+	for(int j = 1; j <= count; j++)
+	{
+		for(int i = 0; i < count-1; i++)
 		{
 			if(ptr->GetMemberNum() > ptr->GetNext()->GetMemberNum())
 			{
 				Swap(ptr,ptr->GetNext());
-				cout << "here" << endl;
 			}
 
-			ptr = ptr->GetNext();
+			ptr = head;
+
+			for(int i = 0; i < step; i++)
+			{
+				ptr = ptr->GetNext();
+			}
+			step++;
 		}
-
-
-
+		step = 1;
+		ptr = head;
+	}
 }
 
 void MemberList::Swap(BasicMember* one, BasicMember* two)
 {
-	BasicMember* temp;
-	temp = one;
-	one  = two;
-	two  = temp;
+	if(head == one)
+	{
+		head = two;
+		two->GetNext()->SetPrev(one);
+		two->SetPrev(NULL);
+		one->SetNext(two->GetNext());
+		one->SetPrev(two);
+		two->SetNext(one);
+	}
+
+	else if(two->GetNext() == NULL)
+	{
+		one->GetPrev()->SetNext(two);
+		two->SetPrev(one->GetPrev());
+		one->SetNext(NULL);
+		one->SetPrev(two);
+		two->SetNext(one);
+	}
+
+	else
+	{
+		one->GetPrev()->SetNext(two);
+		two->GetNext()->SetPrev(one);
+		two->SetPrev(one->GetPrev());
+		one->SetNext(two->GetNext());
+		one->SetPrev(two);
+		two->SetNext(one);
+	}
+}
+
+double MemberList::GrandTotal()
+{
+
+	double total = 0;
+	BasicMember* trace;
+	trace = head;
+	while(trace->GetNext() != NULL)
+	{
+		total = total + trace->GetTotalSpent();
+		trace = trace->GetNext();
+	}
+	return total;
 }
 

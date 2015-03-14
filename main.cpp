@@ -220,8 +220,11 @@ int main()
 				case 2: //All Sales Sorted by Member Number
 				{
 					list.SortID();
-					cout << endl << "New List: " << endl << endl;
+					cout << endl << "Sorted List by Member ID: "
+					     << endl << endl;
 					list.OutputList();
+					cout << "Grand Total: $";
+					cout << list.GrandTotal() * TAX_RATE;
 				}
 					break;
 				case 3: //All Sales Sorted by Item Name
