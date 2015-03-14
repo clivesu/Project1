@@ -127,7 +127,7 @@ dayValid = false;
 return (yearValid && monthValid && dayValid);
 }
 
-bool Date::operator==(const Date & compareDate)
+bool Date::operator==(const Date &compareDate)
 {
 	if(year == compareDate.year && month == compareDate.month &&
 		   day  == compareDate.day)

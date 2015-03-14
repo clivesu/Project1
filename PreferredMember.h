@@ -11,6 +11,7 @@ public:
 	virtual void SetAll(string newName, int newNum, int newMonth,
 						int newDay, int newYear, memberType newType, dollars newTotal = 0,
 						dollars newRebate = 0);
+	virtual void CopyMember(PreferredMember otherMember);
 	//Accessor
 	dollars GetRebate();
 private:

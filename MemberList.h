@@ -9,6 +9,7 @@ public:
 	MemberList();
 	~MemberList();
 	BasicMember* FindMember(int memberNum) const;
+	BasicMember* FindMember(string memberName) const;
 	void AddMember(string newName, int newNum, string newType,
 				 int newMonth, int newDay, int newYear, dollars newTotal);
 	void DeleteMember(BasicMember* target);
@@ -24,6 +25,9 @@ public:
 
 	void ManualAdd();
 	void DeleteMember();
+	void SortID();
+	int  GetCount();
+	void Swap(BasicMember* one, BasicMember* two);
 
 private:
 	BasicMember* head;
