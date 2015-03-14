@@ -174,11 +174,11 @@ void MemberList::FindExpire(int month)
 		if(current->GetMonthEx() == month)
 		{
 			current->OutputMemberInfo();
-			if(typeid(*current) == typeid(BasicMember))
+			if(current->GetType() == BASIC)
 			{
 				cout << "Renew price: $" << BASIC_DUES << endl;
 			}
-			if(typeid(*current) == typeid(PreferredMember))
+			if(current->GetType() == PREFERRED)
 			{
 				cout << "Renew price: $" << PREFERRED_DUES << endl;
 			}
@@ -201,7 +201,7 @@ void MemberList::PrintRebates()
 
 	while(current != NULL)
 	{
-		if(typeid(*current) == typeid(PreferredMember))
+		if(current->GetType() == PREFERRED)
 		{
 			cout << endl;
 			current->OutputMemberInfo();
@@ -227,11 +227,11 @@ void MemberList::DailyShopper(Date checkDate)
 		{
 			cout << current->GetName() << endl;
 
-			if(typeid(*current) == typeid(PreferredMember))
+			if(current->GetType() == PREFERRED)
 			{
 				preferredCount++;
 			}
-			if(typeid(*current) == typeid(BasicMember))
+			if(current->GetType() == BASIC)
 			{
 				basicCount++;
 			}
@@ -335,6 +335,8 @@ BasicMember* MemberList::FindMember(string memberName) const
 
 int MemberList::GetCount()
 {
+	// Not necessary with current sorting algorithm, but good to have anyways.
+
 	BasicMember* finder;
 	int count = 0;
 	finder = head;
@@ -346,13 +348,9 @@ int MemberList::GetCount()
 	return count;
 }
 
-void MemberList::SortID()
+void MemberList::SortID(BasicMember* end)
 {
-	if(head == NULL)
-	{
-		return;
-	}
-	if(head->GetNext() == NULL)
+	if(head == end || head->GetNext() == end)
 	{
 		return;
 	}
@@ -360,26 +358,58 @@ void MemberList::SortID()
 	BasicMember* ptr;
 	ptr  = head;
 
-		while(ptr->GetNext() != NULL)
+		while(ptr->GetNext() != end)
 		{
 			if(ptr->GetMemberNum() > ptr->GetNext()->GetMemberNum())
 			{
-				Swap(ptr,ptr->GetNext());
-				cout << "here" << endl;
+				Swap(ptr, ptr->GetNext());
 			}
-
-			ptr = ptr->GetNext();
+			else
+			{
+				ptr = ptr->GetNext();
+			}
 		}
 
+		SortID(ptr);
 
 
 }
 
 void MemberList::Swap(BasicMember* one, BasicMember* two)
 {
-	BasicMember* temp;
-	temp = one;
-	one  = two;
-	two  = temp;
+	//Only works if these two nodes are originally adjacent members of a linked list,
+	// with one before two.
+
+	one->SetNext(two->GetNext());
+	two->SetPrev(one->GetPrev());
+	one->SetPrev(two);
+	two->SetNext(one);
+
+	if(two->GetPrev() != NULL)
+	{
+		two->GetPrev()->SetNext(two);
+	}
+	else
+	{
+		head = two;
+	}
+
+	if(one->GetNext() != NULL)
+	{
+		one->GetNext()->SetPrev(one);
+	}
 }
 
+double MemberList::GrandTotal()
+{
+
+	double total = 0;
+	BasicMember* trace;
+	trace = head;
+	while(trace-> != NULL)
+	{
+		total = total + trace->GetTotalSpent();
+		trace = trace->GetNext();
+	}
+	return total;
+}

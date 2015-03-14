@@ -19,6 +19,8 @@ int main()
 	TransactionList day3;
 	TransactionList day4;
 	TransactionList day5;
+	TransactionList day600;
+	TransactionList allTransactions;
 	int choice;
 	int	choiceMonth;
 	int searchID;
@@ -224,7 +226,12 @@ int main()
 					list.OutputList();
 				}
 					break;
-				case 3: //All Sales Sorted by Item Name
+				case 3:
+
+					allTransactions.CopyList(day1 + day2 + day3 + day4 + day5);
+					allTransactions.FixCapitalization();
+					allTransactions.SortByItem();
+					allTransactions.OutputList();
 					break;
 				case 4: //Sales information for Single Item
 					break;

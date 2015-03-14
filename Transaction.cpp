@@ -15,6 +15,9 @@ Transaction::~Transaction() //Deconstructor
 
 }
 
+
+
+
 void Transaction::SetItem(int newMonth, int newDay, int newYear,
 						  string newName, dollars newPrice,int newAmount)
 {
@@ -53,6 +56,16 @@ Transaction* Transaction::GetPrev()
 void Transaction::SetPrev(Transaction *newPrev)
 {
 	prev = newPrev;
+}
+
+string Transaction::GetItemName()
+{
+	return itemName;
+}
+
+void Transaction::SetItemName(string newName)
+{
+	itemName = newName;
 }
 
 void Transaction::PrintItemName()

@@ -25,9 +25,11 @@ public:
 
 	void ManualAdd();
 	void DeleteMember();
-	void SortID();
+	void SortID(BasicMember* end = NULL);
 	int  GetCount();
 	void Swap(BasicMember* one, BasicMember* two);
+
+	double MemberList::GrandTotal();
 
 private:
 	BasicMember* head;
