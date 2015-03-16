@@ -5,4 +5,5 @@
 
 void ReadMembersFile(ifstream &infile, MemberList &list);
 void ReadItemFile(ifstream &infile,MemberList &list,TransactionList &daily);
+bool ReadableFile(ifstream &infile);
 #endif /* FUNCTIONHEADER_H_ */

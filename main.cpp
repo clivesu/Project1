@@ -12,6 +12,7 @@ using namespace std;
 int main()
 {
 	ifstream infile; //PROCESS - Open input stream
+	ofstream myfile; //PROCESS - Open output stream
 	string fileName; //PROCESS - Use of string for file name
 	MemberList list;
 	TransactionList day1;
@@ -19,6 +20,8 @@ int main()
 	TransactionList day3;
 	TransactionList day4;
 	TransactionList day5;
+	TransactionList day600;
+	TransactionList allTransactions;
 	int choice;
 	int	choiceMonth;
 	int searchID;
@@ -36,9 +39,23 @@ int main()
 	Date date5 = Date(06,02,2015);
 	BasicMember* foundMember;
 
-	fileName = "warehouse shoppers.txt";
+	fileName = "save.txt";
 	infile.open(fileName.c_str());
-	ReadMembersFile(infile, list);
+	if(ReadableFile(infile) == true)
+	{
+		cout << "Save Found" << endl;
+		infile.open(fileName.c_str());
+		ReadMembersFile(infile, list);
+	}
+
+	else
+	{
+		cout << "No Saves Found!" << endl;
+		fileName = "warehouse shoppers.txt";
+		infile.open(fileName.c_str());
+		ReadMembersFile(infile, list);
+	}
+
 	fileName = "day1.txt";
 	infile.open(fileName.c_str());
 	ReadItemFile(infile,list,day1);
@@ -223,11 +240,20 @@ int main()
 					cout << endl << "Sorted List by Member ID: "
 					     << endl << endl;
 					list.OutputList();
+					//Saving sorted Member List
+					fileName = "save.txt";
+					myfile.open(fileName.c_str());
+					list.SaveMemberList(myfile);
 					cout << "Grand Total: $";
 					cout << list.GrandTotal() * TAX_RATE;
 				}
 					break;
 				case 3: //All Sales Sorted by Item Name
+
+					allTransactions.CopyList(day1 + day2 + day3 + day4 + day5);
+					allTransactions.FixCapitalization();
+					allTransactions.SortByItem();
+					allTransactions.OutputList();
 					break;
 				case 4: //Sales information for Single Item
 					break;

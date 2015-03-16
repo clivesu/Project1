@@ -3,6 +3,22 @@
 #include <iostream>
 using namespace std;
 
+bool ReadableFile(ifstream &infile)
+{
+	bool answer;
+	if(infile.is_open())
+	{
+		answer = true;
+	}
+	else
+	{
+		answer = false;
+	}
+	infile.close();
+	infile.clear();
+	return answer;
+}
+
 void ReadMembersFile(ifstream &infile, MemberList &list)
 {
 string id;
@@ -90,3 +106,4 @@ void ReadItemFile(ifstream &infile,MemberList &list,TransactionList &daily)
 		infile.close();
 		infile.clear();
 }
+

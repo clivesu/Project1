@@ -55,6 +55,15 @@ void Transaction::SetPrev(Transaction *newPrev)
 	prev = newPrev;
 }
 
+string Transaction::GetItemName()
+{
+	return itemName;
+}
+
+void Transaction::SetItemName(string newName)
+{
+	itemName = newName;
+}
 void Transaction::PrintItemName()
 {
 	cout << itemName;

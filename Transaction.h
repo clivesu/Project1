@@ -18,6 +18,8 @@ public:
 	Transaction* GetPrev();
 	Date GetDate();
 	void SetPrev(Transaction* newPrev);
+	string GetItemName();
+	void SetItemName(string newName);
 	void PrintItemName();
 	void PrintPrice();
 	void PrintQuanity();

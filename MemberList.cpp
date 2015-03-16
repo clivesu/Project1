@@ -201,7 +201,7 @@ void MemberList::PrintRebates()
 
 	while(current != NULL)
 	{
-		if(typeid(*current) == typeid(PreferredMember))
+		if(current->GetType() == PREFERRED)
 		{
 			cout << endl;
 			current->OutputMemberInfo();
@@ -227,11 +227,11 @@ void MemberList::DailyShopper(Date checkDate)
 		{
 			cout << current->GetName() << endl;
 
-			if(typeid(*current) == typeid(PreferredMember))
+			if(current->GetType() == PREFERRED)
 			{
 				preferredCount++;
 			}
-			if(typeid(*current) == typeid(BasicMember))
+			if(current->GetType() == BASIC)
 			{
 				basicCount++;
 			}
@@ -346,73 +346,52 @@ int MemberList::GetCount()
 	return count;
 }
 
-void MemberList::SortID()
+void MemberList::SortID(BasicMember* end)
 {
-	int count = GetCount();
-	int step = 1;
-	if(head == NULL)
-	{
-		return;
-	}
-	if(head->GetNext() == NULL)
+	if(head == end || head->GetNext() == end)
 	{
 		return;
 	}
 
 	BasicMember* ptr;
-	ptr  = head;
+	ptr = head;
 
-	for(int j = 1; j <= count; j++)
+	while(ptr->GetNext() != end)
 	{
-		for(int i = 0; i < count-1; i++)
+		if(ptr->GetMemberNum() > ptr->GetNext()->GetMemberNum())
 		{
-			if(ptr->GetMemberNum() > ptr->GetNext()->GetMemberNum())
-			{
-				Swap(ptr,ptr->GetNext());
-			}
-
-			ptr = head;
-
-			for(int i = 0; i < step; i++)
-			{
-				ptr = ptr->GetNext();
-			}
-			step++;
+			Swap(ptr, ptr->GetNext());
 		}
-		step = 1;
-		ptr = head;
+		else
+		{
+			ptr = ptr->GetNext();
+		}
 	}
+	SortID(ptr);
 }
 
 void MemberList::Swap(BasicMember* one, BasicMember* two)
 {
-	if(head == one)
-	{
-		head = two;
-		two->GetNext()->SetPrev(one);
-		two->SetPrev(NULL);
-		one->SetNext(two->GetNext());
-		one->SetPrev(two);
-		two->SetNext(one);
-	}
+	//Only works if these two nodes are originally adjacent members of a linked list,
+	// with one before two.
 
-	else if(two->GetNext() == NULL)
-	{
-		one->GetPrev()->SetNext(two);
-		two->SetPrev(one->GetPrev());
-		one->SetNext(NULL);
-		one->SetPrev(two);
-		two->SetNext(one);
-	}
+	one->SetNext(two->GetNext());
+	two->SetPrev(one->GetPrev());
+	one->SetPrev(two);
+	two->SetNext(one);
 
+	if(two->GetPrev() != NULL)
+	{
+		two->GetPrev()->SetNext(two);
+	}
 	else
 	{
-		one->GetPrev()->SetNext(two);
-		two->GetNext()->SetPrev(one);
-		two->SetPrev(one->GetPrev());
-		one->SetNext(two->GetNext());
-		one->SetPrev(two);
-		two->SetNext(one);
+		head = two;
+	}
+
+	if(one->GetNext() != NULL)
+	{
+		one->GetNext()->SetPrev(one);
 	}
 }
 
@@ -430,3 +409,45 @@ double MemberList::GrandTotal()
 	return total;
 }
 
+void MemberList::SaveMemberList(ofstream &myfile)
+{
+	BasicMember *ptr;
+	ptr = head;
+	string name;
+	int    id;
+	string type;
+	Date   temp;
+	int    month;
+	int    day;
+	int    year;
+	string a = "/";
+
+	while(ptr != NULL)
+	{
+		name = ptr->GetName();
+		id   = ptr->GetMemberNum();
+		if(ptr->GetType() == BASIC)
+		{
+			type = "Basic";
+		}
+		else
+		{
+			type = "Preferred";
+		}
+
+		temp  = ptr->GetExpirationDate();
+		month = temp.GetMonth();
+		day   = temp.GetDay();
+		year  = temp.GetYear();
+
+		myfile << name << endl << id << endl << type << endl;
+		myfile << (month < 10? "0" : "") << month << a
+		       << (day < 10? "0" : "")   << day  << a
+		       << year;
+		       if(ptr->GetNext() != NULL)
+		       {
+		    	   myfile << endl;
+		       }
+		ptr = ptr->GetNext();
+	}
+}

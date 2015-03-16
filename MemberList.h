@@ -25,10 +25,12 @@ public:
 
 	void ManualAdd();
 	void DeleteMember();
-	void SortID();
+	void SortID(BasicMember* end = NULL);
 	int  GetCount();
 	void Swap(BasicMember* one,   BasicMember* two);
-	double GrandTotal();
+	double MemberList::GrandTotal();
+
+	void SaveMemberList(ofstream& myfile);
 
 
 private:
